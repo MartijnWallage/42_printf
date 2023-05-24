@@ -6,7 +6,7 @@
 /*   By: mwallage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:07:39 by mwallage          #+#    #+#             */
-/*   Updated: 2023/05/24 14:50:20 by mwallage         ###   ########.fr       */
+/*   Updated: 2023/05/24 16:29:07 by mwallage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,22 @@ void	ft_init_tab(t_print *tab)
 	tab->percent	= 0;
 	tab->space		= 0;
 	return (tab);
+}
+
+int	is_in_set(char c, char *set)
+{
+	while (*set != c)
+		set++;
+	return (*set);
+}
+
+int	ft_eval_format(t_print tab, char *format, int i)
+{
+	while (!is_in_set(format[i], "udcsupxX%")
+	{
+		if (format[i] == '.')
+			tab->point = 1;
+		if (format[i] == 
 }
 
 int	ft_printf(const char *format, ...)
