@@ -6,11 +6,11 @@
 /*   By: mwallage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:07:39 by mwallage          #+#    #+#             */
-/*   Updated: 2023/05/24 16:29:07 by mwallage         ###   ########.fr       */
+/*   Updated: 2023/05/25 16:05:43 by mwallage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../inc/ft_printf.h"
 
 void	ft_init_tab(t_print *tab)
 {
@@ -24,23 +24,62 @@ void	ft_init_tab(t_print *tab)
 	tab->is_zero	= 0;
 	tab->percent	= 0;
 	tab->space		= 0;
-	return (tab);
 }
 
-int	is_in_set(char c, char *set)
+int	is_in_set(const char c, const char *set)
 {
 	while (*set != c)
 		set++;
 	return (*set);
 }
 
-int	ft_eval_format(t_print tab, char *format, int i)
+void	ft_print_int(t_print *tab)
 {
-	while (!is_in_set(format[i], "udcsupxX%")
+	int		nb;
+	int		len;
+	int		div;
+	char	c;
+
+	nb = va_arg(tab->args, int);
+	len = 1;
+	div = 1;
+	while (nb / div > 9)
+	{
+		div *= 10;
+		len++;
+	}
+	tab->total_len += len;
+	while (len--)
+	{
+		c = nb / div + '0';
+		write(1, &c, 1);
+		nb %= 10;
+		div /= 10;
+	}
+}
+
+void	ft_print_char(t_print *tab)
+{
+	char	c;
+
+	c = va_arg(tab->args, int);
+	tab->total_len += write(1, &c, 1);
+}
+
+int	ft_eval_format(t_print *tab, const char *format, int i)
+{
+	while (!is_in_set(format[i], "udcsupxX%"))
 	{
 		if (format[i] == '.')
 			tab->point = 1;
-		if (format[i] == 
+		if (format[i] == '-')
+			tab->dash = 1;
+	}
+	if (format[i] == 'd')
+		ft_print_int(tab);
+	if (format[i] == 'c')
+		ft_print_char(tab);
+	return (1);
 }
 
 int	ft_printf(const char *format, ...)
@@ -60,7 +99,7 @@ int	ft_printf(const char *format, ...)
 	while (format[++i])
 	{
 		if (format[i] == '%')
-			i = ft_eval_format(tab, format, i + 1)
+			i += ft_eval_format(tab, format, i + 1);
 		else
 			return_value += write(1, &format[i], 1);
 	}
