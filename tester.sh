@@ -4,9 +4,8 @@ cc -o tester src/test.c -L. -lftprintf
 echo
 echo -------------begin ft_printf tester-------------------------------
 echo
-./tester
+./tester $1
 echo
 echo -------------end ft_printf tester---------------------------------
 echo
-make fclean
 rm -f tester

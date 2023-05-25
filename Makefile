@@ -6,7 +6,7 @@
 #    By: mwallage <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/25 13:18:50 by mwallage          #+#    #+#              #
-#    Updated: 2023/05/25 15:28:41 by mwallage         ###   ########.fr        #
+#    Updated: 2023/05/25 20:20:54 by mwallage         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,22 +24,21 @@ NAME 	:= libftprintf.a
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(OBJS)
-	mv $(LIBDIR)/$(LIBFT) libftprintf.a
-	make clean -C ./$(LIBDIR)
+$(NAME): $(OBJS)
+	make -C ./$(LIBDIR)
+	cp $(LIBDIR)/$(LIBFT) libftprintf.a
 	$(AR) rcs $@ $(OBJS)
 
-$(LIBFT):
-	make bonus -C ./$(LIBDIR)
-
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) -c $< -o $@
 
 clean:
 	rm -rf $(OBJDIR)/*.o
+	make clean -C ./$(LIBDIR)
 
 fclean: clean
 	rm -f $(NAME)
+	make fclean -C ./$(LIBDIR)
 
 re: fclean $(NAME)
 

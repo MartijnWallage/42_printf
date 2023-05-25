@@ -6,7 +6,7 @@
 /*   By: mwallage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 14:34:02 by mwallage          #+#    #+#             */
-/*   Updated: 2023/05/25 16:04:15 by mwallage         ###   ########.fr       */
+/*   Updated: 2023/05/25 21:02:52 by mwallage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdarg.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <limits.h>
 # include "../libft/libft.h"
 
 typedef struct	s_print                       
@@ -33,11 +34,14 @@ typedef struct	s_print
 	int		space;
 }				t_print;
 
-int		ft_printf(const char *format, ...);
-int		ft_eval_format(t_print *tab, const char *format, int i);
-int		is_in_set(const char c, const char *set);
-void	ft_init_tab(t_print *tab);
-void	ft_print_int(t_print *tab);
-void	ft_print_char(t_print *tab);
+int				ft_printf(const char *format, ...);
+int				ft_eval_format(t_print *tab, const char *format, int i);
+int				is_in_set(const char c, const char *set);
+void			ft_init_tab(t_print *tab);
+void			ft_print_int(t_print *tab);
+void			ft_print_char(t_print *tab);
+unsigned long	ft_abs(int nb);
+unsigned long	ft_power(unsigned int base, unsigned int power);
+unsigned int	ft_log(unsigned int base, unsigned long log);
 
 #endif

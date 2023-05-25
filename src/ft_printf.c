@@ -6,7 +6,7 @@
 /*   By: mwallage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:07:39 by mwallage          #+#    #+#             */
-/*   Updated: 2023/05/25 16:05:43 by mwallage         ###   ########.fr       */
+/*   Updated: 2023/05/25 21:05:35 by mwallage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,26 +36,12 @@ int	is_in_set(const char c, const char *set)
 void	ft_print_int(t_print *tab)
 {
 	int		nb;
-	int		len;
-	int		div;
-	char	c;
-
+	
 	nb = va_arg(tab->args, int);
-	len = 1;
-	div = 1;
-	while (nb / div > 9)
-	{
-		div *= 10;
-		len++;
-	}
-	tab->total_len += len;
-	while (len--)
-	{
-		c = nb / div + '0';
-		write(1, &c, 1);
-		nb %= 10;
-		div /= 10;
-	}
+	if (nb < 0)
+		tab->total_len++;
+	tab->total_len += ft_log(10, ft_abs(nb)) + 1;
+	ft_putnbr_fd(nb, 1);
 }
 
 void	ft_print_char(t_print *tab)
