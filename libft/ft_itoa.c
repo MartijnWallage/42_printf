@@ -6,20 +6,24 @@
 /*   By: mwallage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 16:14:31 by mwallage          #+#    #+#             */
-/*   Updated: 2023/05/26 14:24:37 by mwallage         ###   ########.fr       */
+/*   Updated: 2023/05/26 21:19:32 by mwallage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
+#include <stdio.h>
 
 static void	recursion(char *str, unsigned int nb, unsigned int base)
 {
+	char	*baseset;
+
+	baseset = "0123456789abcdefgh";
 	if (nb >= base)
 		recursion(str, nb / base, base);
 	while (*str)
 		str++;
-	*str = nb % base + '0';
+	*str = baseset[nb % base];
 }
 
 char	*ft_itoa_base(int n, unsigned int base)
@@ -30,7 +34,12 @@ char	*ft_itoa_base(int n, unsigned int base)
 	unsigned int	digits;
 	unsigned int	neg;
 
-	neg = (n < 0);
+	printf("n = %d\n", n);
+	if (n < 0)
+		neg = 1;
+	else
+		neg = 0;
+	printf("neg = %d\n", neg);
 	nb = (unsigned int)(n);
 	if (neg)
 		nb = (unsigned int)(n * -1);

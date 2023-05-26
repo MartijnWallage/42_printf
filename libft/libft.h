@@ -6,7 +6,7 @@
 /*   By: mwallage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 13:05:42 by mwallage          #+#    #+#             */
-/*   Updated: 2023/05/26 14:25:01 by mwallage         ###   ########.fr       */
+/*   Updated: 2023/05/26 20:27:27 by mwallage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBFT_H
 
 # include <stddef.h>
+# include <limits.h>
 
 typedef struct s_list
 {
@@ -54,7 +55,7 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
-void	ft_putnbr_base_fd(long n, unsigned int base, int fd);
+int		ft_putnbr_base_fd(long long n, unsigned int base, int fd);
 t_list	*ft_lstnew(void *content);
 void	ft_lstadd_front(t_list **lst, t_list *new);
 int		ft_lstsize(t_list *lst);

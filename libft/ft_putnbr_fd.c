@@ -6,34 +6,45 @@
 /*   By: mwallage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 17:24:44 by mwallage          #+#    #+#             */
-/*   Updated: 2023/05/26 14:25:51 by mwallage         ###   ########.fr       */
+/*   Updated: 2023/05/26 20:27:12 by mwallage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	recursion(unsigned int nb, unsigned int base, int fd)
+static int	recursion(unsigned long long nb, unsigned int base, int fd)
 {
+	int		chars_written;
 	char	c;
+	char	*baseset;
 
+	chars_written = 0;
+	baseset = "0123456789abcdefgh";
 	if (nb >= base)
-		recursion(nb / base, base, fd);
-	c = nb % base + '0';
+		chars_written += recursion(nb / base, base, fd);
+	c = baseset[nb % base];
 	ft_putchar_fd(c, fd);
+	chars_written++;
+	return (chars_written);
 }
 
-void	ft_putnbr_base_fd(long n, unsigned int base, int fd)
+int	ft_putnbr_base_fd(long long n, unsigned int base, int fd)
 {
-	unsigned int	nb;
+	unsigned long long	nb;
 
-	if (n < 0)
+	if (n == LLONG_MIN)
 	{
 		ft_putchar_fd('-', fd);
-		nb = (unsigned int)(n * -1);
+		nb = (unsigned long long)LLONG_MAX + 1;
+	}
+	else if (n < 0)
+	{
+		ft_putchar_fd('-', fd);
+		nb = (unsigned long long)(n * -1);
 	}
 	else
-		nb = (unsigned int) n;
-	recursion(nb, base, fd);
+		nb = (unsigned long long) n;
+	return (recursion(nb, base, fd));
 }
 /*
 #include <fcntl.h>
