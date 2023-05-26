@@ -6,7 +6,7 @@
 /*   By: mwallage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 18:22:36 by mwallage          #+#    #+#             */
-/*   Updated: 2023/05/25 21:02:27 by mwallage         ###   ########.fr       */
+/*   Updated: 2023/05/26 13:39:32 by mwallage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ unsigned long	ft_abs(int nb)
 		return ((unsigned long) nb);
 }
 
-unsigned long	ft_power(unsigned int base, unsigned int power)
+unsigned long	ft_pow(unsigned int base, unsigned int power)
 {
 	unsigned long	result;
 
@@ -36,14 +36,24 @@ unsigned long	ft_power(unsigned int base, unsigned int power)
 
 unsigned int	ft_log(unsigned int base, unsigned long log)
 {
-	unsigned int	power;
+	unsigned long	raised;
+	unsigned int	i;
 
-	if (log <= 1)
+	if (base == 0)
 		return (0);
-	power = 1;
-	while (ft_power(base, power) < log)
-		power++;
-	power--;
-	return (power);
+	i = 0;
+	raised = base;
+	while (raised <= log)
+	{
+		raised *= base;
+		i++;
+	}
+	return (i);
 }
 
+int	is_in_set(const char c, const char *set)
+{
+	while (*set != c)
+		set++;
+	return (*set);
+}

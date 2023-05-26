@@ -6,7 +6,7 @@
 /*   By: mwallage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 14:34:02 by mwallage          #+#    #+#             */
-/*   Updated: 2023/05/25 21:02:52 by mwallage         ###   ########.fr       */
+/*   Updated: 2023/05/26 15:30:30 by mwallage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,18 @@ typedef struct	s_print
 
 int				ft_printf(const char *format, ...);
 int				ft_eval_format(t_print *tab, const char *format, int i);
-int				is_in_set(const char c, const char *set);
 void			ft_init_tab(t_print *tab);
-void			ft_print_int(t_print *tab);
 void			ft_print_char(t_print *tab);
+void			ft_print_str(t_print *tab);
+void			ft_print_pnt(t_print *tab);
+void			ft_print_int(t_print *tab);
+void			ft_print_und(t_print *tab);
+void			ft_print_hex(t_print *tab);
+void			ft_print_HEX(t_print *tab);
+void			ft_print_perc(t_print *tab);
 unsigned long	ft_abs(int nb);
-unsigned long	ft_power(unsigned int base, unsigned int power);
+unsigned long	ft_pow(unsigned int base, unsigned int power);
 unsigned int	ft_log(unsigned int base, unsigned long log);
+int				is_in_set(const char c, const char *set);
 
 #endif

@@ -6,23 +6,23 @@
 /*   By: mwallage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 16:14:31 by mwallage          #+#    #+#             */
-/*   Updated: 2023/05/09 18:21:25 by mwallage         ###   ########.fr       */
+/*   Updated: 2023/05/26 14:24:37 by mwallage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
 
-static void	recursion(char *str, unsigned int nb)
+static void	recursion(char *str, unsigned int nb, unsigned int base)
 {
-	if (nb > 9)
-		recursion(str, nb / 10);
+	if (nb >= base)
+		recursion(str, nb / base, base);
 	while (*str)
 		str++;
-	*str = nb % 10 + '0';
+	*str = nb % base + '0';
 }
 
-char	*ft_itoa(int n)
+char	*ft_itoa_base(int n, unsigned int base)
 {
 	char			*result;
 	unsigned int	nb;
@@ -36,9 +36,9 @@ char	*ft_itoa(int n)
 		nb = (unsigned int)(n * -1);
 	div = 1;
 	digits = 1;
-	while (nb / div > 9)
+	while (nb / div >= base)
 	{
-		div *= 10;
+		div *= base;
 		digits++;
 	}
 	result = malloc(digits + 1 + neg);
@@ -47,7 +47,7 @@ char	*ft_itoa(int n)
 	ft_bzero(result, digits + 1 + neg);
 	if (neg)
 		*result = '-';
-	recursion(result, nb);
+	recursion(result, nb, base);
 	return (result);
 }
 /*

@@ -6,7 +6,7 @@
 /*   By: mwallage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:07:39 by mwallage          #+#    #+#             */
-/*   Updated: 2023/05/25 21:05:35 by mwallage         ###   ########.fr       */
+/*   Updated: 2023/05/26 15:30:39 by mwallage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,32 +26,6 @@ void	ft_init_tab(t_print *tab)
 	tab->space		= 0;
 }
 
-int	is_in_set(const char c, const char *set)
-{
-	while (*set != c)
-		set++;
-	return (*set);
-}
-
-void	ft_print_int(t_print *tab)
-{
-	int		nb;
-	
-	nb = va_arg(tab->args, int);
-	if (nb < 0)
-		tab->total_len++;
-	tab->total_len += ft_log(10, ft_abs(nb)) + 1;
-	ft_putnbr_fd(nb, 1);
-}
-
-void	ft_print_char(t_print *tab)
-{
-	char	c;
-
-	c = va_arg(tab->args, int);
-	tab->total_len += write(1, &c, 1);
-}
-
 int	ft_eval_format(t_print *tab, const char *format, int i)
 {
 	while (!is_in_set(format[i], "udcsupxX%"))
@@ -61,10 +35,22 @@ int	ft_eval_format(t_print *tab, const char *format, int i)
 		if (format[i] == '-')
 			tab->dash = 1;
 	}
-	if (format[i] == 'd')
-		ft_print_int(tab);
 	if (format[i] == 'c')
 		ft_print_char(tab);
+	if (format[i] == 's')
+		ft_print_str(tab);
+	if (format[i] == 'p')
+		ft_print_pnt(tab);
+	if (format[i] == 'd' || format[i] == 'i')
+		ft_print_int(tab);
+	if (format[i] == 'u')
+		ft_print_und(tab);
+	if (format[i] == 'x')
+		ft_print_hex(tab);
+	if (format[i] == 'X')
+		ft_print_HEX(tab);
+	if (format[i] == '%')
+		ft_print_perc(tab);
 	return (1);
 }
 

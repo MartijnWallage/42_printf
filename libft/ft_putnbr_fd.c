@@ -6,23 +6,23 @@
 /*   By: mwallage <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 17:24:44 by mwallage          #+#    #+#             */
-/*   Updated: 2023/05/05 18:03:29 by mwallage         ###   ########.fr       */
+/*   Updated: 2023/05/26 14:25:51 by mwallage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	recursion(unsigned int nb, int fd)
+static void	recursion(unsigned int nb, unsigned int base, int fd)
 {
 	char	c;
 
-	if (nb > 9)
-		recursion(nb / 10, fd);
-	c = nb % 10 + '0';
+	if (nb >= base)
+		recursion(nb / base, base, fd);
+	c = nb % base + '0';
 	ft_putchar_fd(c, fd);
 }
 
-void	ft_putnbr_fd(int n, int fd)
+void	ft_putnbr_base_fd(long n, unsigned int base, int fd)
 {
 	unsigned int	nb;
 
@@ -33,7 +33,7 @@ void	ft_putnbr_fd(int n, int fd)
 	}
 	else
 		nb = (unsigned int) n;
-	recursion(nb, fd);
+	recursion(nb, base, fd);
 }
 /*
 #include <fcntl.h>
