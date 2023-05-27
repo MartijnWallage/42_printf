@@ -25,24 +25,24 @@ void	test_utils(void)
 {
 	int	i, nb;
 
-//	for (i = INT_MIN; i < 10; i++)
+//	for (i = INT_MIN; i < 10; i += 100)
 //		assert((int) ft_abs(i) == abs(i));
-	assert(ft_log(2, 8) == 3);
-	assert(ft_log(10, 1000) == 3);
-	assert(ft_log(3, 1) == 0);
-	assert(ft_log(3, 1) == 0);
+	assert(ft_log2(8) == 3);
+	assert(ft_log_base(10, 1000) == 3);
+	assert(ft_log_base(3, 1) == 0);
+	assert(ft_log_base(3, 1) == 0);
 	assert(ft_pow(10, 9) == pow(10, 9));
 	assert(ft_pow(10, 10) == pow(10, 10));
-	printf("ft_log(10, 147483648) = %u\n", ft_log(10, 147483648));
-	printf("ft_pow(10, 9) = %lu\n", ft_pow(10, 9));
-	printf("ft_log(10, 2147483648) = %u\n", ft_log(10, 2147483648));
-	printf("ft_pow(10, 10) = %lu\n", ft_pow(10, 10));
-	assert(ft_log(10, 2147483648) == 9);
+	printf("ft_log_base(10, 147483648) = %u\n", ft_log_base(10, 147483648));
+	printf("ft_pow(10, 9) = %u\n", ft_pow(10, 9));
+	printf("ft_log_base(10, 2147483648) = %u\n", ft_log_base(10, 2147483648));
+	printf("ft_pow(10, 10) = %u\n", ft_pow(10, 10));
+	assert(ft_log_base(10, 2147483648) == 9);
 	for (i = 0; i < 10; i++)
 	{
 		nb = ft_pow(2, i);
 		assert(nb == (unsigned int)pow(2, i));
-		assert(ft_log(2, nb) == i);
+		assert(ft_log2(nb) == i);
 	}
 }
 
@@ -125,8 +125,10 @@ int	main(int argc, char *argv[])
 	test_utils();
 	if (argc < 2)
 		return (1);
+	printf("\n\033[0;32m************************SOME TESTS****************************\n");
+	printf("\033[0m\n");
 	str = argv[1];
-	nb = ft_strlen(str);	
+	nb = ft_strlen(str);
 	ret = ft_printf("My ft_printf: Here is an int: \t\t%d\n", 0);
 	printf("Return value: \t\t\t%d\n", ret);
 	ret = printf("stdio printf: Here is an int: \t\t%d\n", 0);
@@ -145,8 +147,8 @@ int	main(int argc, char *argv[])
 	printf("Return value: \t\t\t%d\n", ret);
 	ft_printf("My ft_printf: Here is a char: \t\t%c\n", *str);
 	printf("stdio.h printf: Here is a char: \t%d\n", *str);
-	printf("%d to the power of %d is: \t\t%lu\n", nb, argc, ft_pow(nb, argc));
-	printf("The logorithm base 2 of %d is: \t\t%d\n", nb, ft_log(2, nb));
+	printf("%d to the power of %d is: \t\t%u\n", nb, argc, ft_pow(nb, argc));
+	printf("The logorithm base 2 of %d is: \t\t%d\n", nb, ft_log2(nb));
 	printf("\n\033[0;32m************************TEST CONVERSIONS**********************\n");
 	printf("\033[0m\n");
 	test_conversions();

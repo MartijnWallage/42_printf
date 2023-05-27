@@ -17,7 +17,6 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
-# include "../libft/libft.h"
 
 typedef struct	s_print                       
 {
@@ -37,6 +36,7 @@ typedef struct	s_print
 int				ft_printf(const char *format, ...);
 int				ft_eval_format(t_print *tab, const char *format, int i);
 void			ft_init_tab(t_print *tab);
+/* Conversions */
 void			ft_print_char(t_print *tab);
 void			ft_print_str(t_print *tab);
 void			ft_print_pnt(t_print *tab);
@@ -45,9 +45,16 @@ void			ft_print_und(t_print *tab);
 void			ft_print_hex(t_print *tab);
 void			ft_print_HEX(t_print *tab);
 void			ft_print_perc(t_print *tab);
-unsigned long	ft_abs(int nb);
-unsigned long	ft_pow(unsigned int base, unsigned int power);
-unsigned int	ft_log(unsigned int base, unsigned long log);
+/* Print conversions */
+unsigned int	ft_putstr(char *str);
+unsigned int	ft_putnbr_base(ssize_t nbr, char *base);
+/* Utility functions */
+unsigned int	ft_strlen(const char *str);
+size_t			ft_abs(ssize_t nbr);
+ssize_t			twos_complement(ssize_t nbr);
 int				is_in_set(const char c, const char *set);
+unsigned int	ft_log2(unsigned int n);
+unsigned int	ft_log_base(unsigned int base, unsigned int n);
+unsigned int	ft_pow(unsigned int base, unsigned int exponent);
 
 #endif

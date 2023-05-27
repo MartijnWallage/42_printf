@@ -19,14 +19,16 @@ INCDIR	:= inc
 LIBDIR	:= libft
 LIBFT	:= libft.a
 SRCS	:= $(wildcard $(SRCDIR)/*.c)
-OBJS	:= $(patsubst $(SRCDIR)/%.c,$(OBJDIR)/%.o,$(SRCS))
 NAME 	:= libftprintf.a
 
 all: $(NAME)
 
+$(OBJDIR):
+	mkdir obj
+
+OBJS	:= $(patsubst $(SRCDIR)/%.c,$(OBJDIR)/%.o,$(SRCS))
+
 $(NAME): $(OBJS)
-	make -C ./$(LIBDIR)
-	cp $(LIBDIR)/$(LIBFT) libftprintf.a
 	$(AR) rcs $@ $(OBJS)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c

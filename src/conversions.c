@@ -30,14 +30,13 @@ void	ft_print_str(t_print *tab)
 		tab->total_len += write(1, "(null)", 6);
 		return ;
 	}
-	ft_putstr_fd(str, 1);
-	tab->total_len += ft_strlen(str);
+	tab->total_len += ft_putstr(str);
 }
 
 void	ft_print_pnt(t_print *tab)
 {
-	void		*ptr;
-	long long	nb;
+	void	*ptr;
+	size_t	nb;
 
 	ptr = va_arg(tab->args, void*);
 	if (ptr == NULL)
@@ -45,9 +44,9 @@ void	ft_print_pnt(t_print *tab)
 		tab->total_len += write(1, "(nil)", 5);
 		return ;
 	}
-	nb = (long long) ptr;
+	nb = (size_t) ptr;
 	tab->total_len += write(1, "0x", 2);
-	tab->total_len += ft_putnbr_base_fd(nb, 16, 1);
+	tab->total_len += ft_putnbr_base(nb, "0123456789abcdef");
 }
 
 void	ft_print_int(t_print *tab)
@@ -55,9 +54,7 @@ void	ft_print_int(t_print *tab)
 	int	nb;
 
 	nb = va_arg(tab->args, int);
-	tab->total_len += ft_putnbr_base_fd(nb, 10, 1);
-	if (nb < 0)
-		tab->total_len++;
+	tab->total_len += ft_putnbr_base(nb, "0123456789");
 }
 
 void	ft_print_und(t_print *tab)
@@ -65,50 +62,23 @@ void	ft_print_und(t_print *tab)
 	unsigned int	nb;
 
 	nb = va_arg(tab->args, unsigned int);
-	ft_putnbr_base_fd(nb, 10, 1);
-	tab->total_len += ft_log(10, nb) + 1;
+	tab->total_len += ft_putnbr_base(nb, "0123456789");
 }
 
 void	ft_print_hex(t_print *tab)
 {
-	int				nb;
-	unsigned int	unb;
-	unsigned int	mask;
+	size_t	nb;
 
 	nb = va_arg(tab->args, int);
-	unb = (unsigned int)nb;
-	mask = 1 << (sizeof(int) * 8 - 1);
-	if (nb < 0)
-		unb = unb | (~mask + 1);
-	tab->total_len += ft_putnbr_base_fd(unb, 16, 1);
+	tab->total_len += ft_putnbr_base(nb, "0123456789abcdef");
 }
 
 void	ft_print_HEX(t_print *tab)
 {
-	int				nb;
-	int				i;
-	int				upper;
-	unsigned int	unb;
-	unsigned int	mask;
-	char			*str;
+	size_t	nb;
 
 	nb = va_arg(tab->args, int);
-	unb = (unsigned int)nb;
-	mask = 1 << (sizeof(int) * 8 - 1);
-	if (nb < 0)
-		unb = unb | (~mask + 1);
-	printf("unb = %ld\n", unb);
-	str = ft_itoa_base(unb, 16);
-	if (str == NULL)
-		return ;
-	i = 0;
-	while (str[i])
-	{
-		upper = ft_toupper(str[i]);
-		tab->total_len += write(1, &upper, 1);
-		i++;
-	}
-	free(str);
+	tab->total_len += ft_putnbr_base(nb, "0123456789ABCDEF");
 }
 
 void	ft_print_perc(t_print *tab)
