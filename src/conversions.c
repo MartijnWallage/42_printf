@@ -12,6 +12,10 @@
 
 #include "../inc/ft_printf.h"
 
+#define	dec	"0123456789"
+#define hex "0123456789abcdef"
+#define HEX "0123456789ABCDEF"
+
 void	ft_print_char(t_print *tab)
 {
 	char	c;
@@ -46,7 +50,7 @@ void	ft_print_pnt(t_print *tab)
 	}
 	nb = (size_t) ptr;
 	tab->total_len += write(1, "0x", 2);
-	tab->total_len += ft_putnbr_base(nb, "0123456789abcdef");
+	tab->total_len += ft_putnbr_base(nb, hex);
 }
 
 void	ft_print_int(t_print *tab)
@@ -54,7 +58,7 @@ void	ft_print_int(t_print *tab)
 	int	nb;
 
 	nb = va_arg(tab->args, int);
-	tab->total_len += ft_putnbr_base(nb, "0123456789");
+	tab->total_len += ft_putnbr_base(nb, dec);
 }
 
 void	ft_print_und(t_print *tab)
@@ -62,7 +66,7 @@ void	ft_print_und(t_print *tab)
 	unsigned int	nb;
 
 	nb = va_arg(tab->args, unsigned int);
-	tab->total_len += ft_putnbr_base(nb, "0123456789");
+	tab->total_len += ft_putnbr_base(nb, dec);
 }
 
 void	ft_print_hex(t_print *tab)
@@ -70,7 +74,7 @@ void	ft_print_hex(t_print *tab)
 	size_t	nb;
 
 	nb = va_arg(tab->args, int);
-	tab->total_len += ft_putnbr_base(nb, "0123456789abcdef");
+	tab->total_len += ft_putnbr_base(nb, hex);
 }
 
 void	ft_print_HEX(t_print *tab)
@@ -78,7 +82,7 @@ void	ft_print_HEX(t_print *tab)
 	size_t	nb;
 
 	nb = va_arg(tab->args, int);
-	tab->total_len += ft_putnbr_base(nb, "0123456789ABCDEF");
+	tab->total_len += ft_putnbr_base(nb, HEX);
 }
 
 void	ft_print_perc(t_print *tab)

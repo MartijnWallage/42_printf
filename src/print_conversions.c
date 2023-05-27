@@ -13,14 +13,29 @@ unsigned int	ft_putstr(char *str)
 	return (chrs_written);
 }
 
-unsigned int	ft_putnbr_base(ssize_t nbr, char *base)
+#include <stdio.h>
+static unsigned int	putnbr_recursion(ssize_t nbr, char *base, unsigned int baselen)
 {
 	int		chrs_written;
-	int		baselen;
-	int		digits;
-	int		div;
 	char	c;
 
+	chrs_written = 0;
+	if (nbr < 0)
+		printf("Nbr before recursion = %li\n", nbr);
+	if (ft_abs(nbr) >= baselen)
+		chrs_written += putnbr_recursion(nbr / baselen, base, baselen);
+	c = base[ft_abs(nbr % baselen)];
+	printf("\nNbr: %x, baselen: %d, nbr %% baselen: %d\n", nbr, baselen, nbr % baselen);
+	chrs_written += write(1, &c, 1);
+	return (chrs_written);
+}
+
+unsigned int	ft_putnbr_base(ssize_t nbr, char *base)
+{
+	unsigned int	chrs_written;
+	unsigned int	baselen;
+
+	chrs_written = 0;
 	baselen = ft_strlen(base);
 	if (baselen < 2)
 		return (0);
@@ -32,16 +47,11 @@ unsigned int	ft_putnbr_base(ssize_t nbr, char *base)
 			nbr = ft_abs(nbr);
 		}
 		else
+		{
 			nbr = twos_complement(nbr);
+			printf("Nbr = twos_complement: %li\n", nbr);
+		}
 	}
-	digits = ft_log_base(nbr, baselen);
-	chrs_written += digits;
-	while (digits--)
-	{
-		div = ft_pow(baselen, digits - 1);
-		c = base[nbr / div];
-		chrs_written = write(1, &c, 1);
-		nbr %= div;
-	}
+	chrs_written += putnbr_recursion(nbr, base, baselen);
 	return (chrs_written);
 }

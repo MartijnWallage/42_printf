@@ -33,7 +33,10 @@ int	is_in_set(const char c, const char *set)
 
 ssize_t	twos_complement(ssize_t nbr)
 {
-	nbr = ~nbr + 1;
+	size_t	positive;
+
+	positive = (size_t) -nbr;
+	nbr = ~positive + 1;
 	return (nbr);
 }
 

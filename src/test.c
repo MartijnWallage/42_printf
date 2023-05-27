@@ -25,8 +25,8 @@ void	test_utils(void)
 {
 	int	i, nb;
 
-//	for (i = INT_MIN; i < 10; i += 100)
-//		assert((int) ft_abs(i) == abs(i));
+	for (i = INT_MIN; i < 0; i /= 10)
+		assert((int) ft_abs(i) == abs(i));
 	assert(ft_log2(8) == 3);
 	assert(ft_log_base(10, 1000) == 3);
 	assert(ft_log_base(3, 1) == 0);
