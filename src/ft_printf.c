@@ -34,24 +34,25 @@ int	ft_eval_format(t_print *tab, const char *format, int i)
 			tab->point = 1;
 		if (format[i] == '-')
 			tab->dash = 1;
+		i++;
 	}
 	if (format[i] == 'c')
 		ft_print_char(tab);
-	if (format[i] == 's')
+	else if (format[i] == 's')
 		ft_print_str(tab);
-	if (format[i] == 'p')
+	else if (format[i] == 'p')
 		ft_print_pnt(tab);
-	if (format[i] == 'd' || format[i] == 'i')
+	else if (format[i] == 'd' || format[i] == 'i')
 		ft_print_int(tab);
-	if (format[i] == 'u')
+	else if (format[i] == 'u')
 		ft_print_und(tab);
-	if (format[i] == 'x')
+	else if (format[i] == 'x')
 		ft_print_hex(tab);
-	if (format[i] == 'X')
+	else if (format[i] == 'X')
 		ft_print_hex_upper(tab);
-	if (format[i] == '%')
+	else if (format[i] == '%')
 		ft_print_perc(tab);
-	return (1);
+	return (i);
 }
 
 int	ft_printf(const char *format, ...)
