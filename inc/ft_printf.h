@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mwallage <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mwallage <mwallage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 14:34:02 by mwallage          #+#    #+#             */
-/*   Updated: 2023/05/26 15:30:30 by mwallage         ###   ########.fr       */
+/*   Updated: 2023/05/27 18:45:55 by mwallage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdlib.h>
 # include <limits.h>
 
-typedef struct	s_print                       
+typedef struct s_print
 {
 	va_list	args;
 	int		width;
@@ -43,7 +43,7 @@ void			ft_print_pnt(t_print *tab);
 void			ft_print_int(t_print *tab);
 void			ft_print_und(t_print *tab);
 void			ft_print_hex(t_print *tab);
-void			ft_print_HEX(t_print *tab);
+void			ft_print_hex_upper(t_print *tab);
 void			ft_print_perc(t_print *tab);
 /* Print conversions */
 unsigned int	ft_putstr(char *str);
@@ -51,10 +51,6 @@ unsigned int	ft_putnbr_base(ssize_t nbr, char *base);
 /* Utility functions */
 unsigned int	ft_strlen(const char *str);
 size_t			ft_abs(ssize_t nbr);
-ssize_t			twos_complement(ssize_t nbr);
 int				is_in_set(const char c, const char *set);
-unsigned int	ft_log2(unsigned int n);
-unsigned int	ft_log_base(unsigned int base, unsigned int n);
-unsigned int	ft_pow(unsigned int base, unsigned int exponent);
 
 #endif

@@ -14,16 +14,16 @@
 
 void	ft_init_tab(t_print *tab)
 {
-	tab->width		= 0;
-	tab->precision	= 0;
-	tab->zero		= 0;
-	tab->point		= 0;
-	tab->dash		= 0;
-	tab->total_len	= 0;
-	tab->sign		= 0;
-	tab->is_zero	= 0;
-	tab->percent	= 0;
-	tab->space		= 0;
+	tab->width = 0;
+	tab->precision = 0;
+	tab->zero = 0;
+	tab->point = 0;
+	tab->dash = 0;
+	tab->total_len = 0;
+	tab->sign = 0;
+	tab->is_zero = 0;
+	tab->percent = 0;
+	tab->space = 0;
 }
 
 int	ft_eval_format(t_print *tab, const char *format, int i)
@@ -48,7 +48,7 @@ int	ft_eval_format(t_print *tab, const char *format, int i)
 	if (format[i] == 'x')
 		ft_print_hex(tab);
 	if (format[i] == 'X')
-		ft_print_HEX(tab);
+		ft_print_hex_upper(tab);
 	if (format[i] == '%')
 		ft_print_perc(tab);
 	return (1);
