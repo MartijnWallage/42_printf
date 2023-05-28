@@ -17,10 +17,12 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
+# include <stdio.h>
 
 typedef struct s_print
 {
 	va_list	args;
+	int		hash;
 	int		width;
 	int		precision;
 	int		zero;
@@ -29,13 +31,16 @@ typedef struct s_print
 	int		total_len;
 	int		sign;
 	int		is_zero;
-	int		percent;
 	int		space;
 }				t_print;
 
 int				ft_printf(const char *format, ...);
 int				ft_eval_format(t_print *tab, const char *format, int i);
 void			ft_init_tab(t_print *tab);
+/* Read modifiers*/
+int				read_flags(t_print *tab, const char *format, int i);
+int				read_width(t_print *tab, const char *format, int i);
+int				read_precision(t_print *tab, const char *format, int i);
 /* Conversions */
 void			ft_print_char(t_print *tab);
 void			ft_print_str(t_print *tab);
@@ -52,5 +57,6 @@ unsigned int	ft_putnbr_base(ssize_t nbr, char *base);
 unsigned int	ft_strlen(const char *str);
 size_t			ft_abs(ssize_t nbr);
 int				is_in_set(const char c, const char *set);
+int				ft_atoi_start_to_end(const char *str, int start, int end);
 
 #endif

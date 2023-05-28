@@ -26,9 +26,9 @@ unsigned int	ft_strlen(const char *str)
 
 int	is_in_set(const char c, const char *set)
 {
-	while (*set != c)
+	while (*set && *set != c)
 		set++;
-	return (*set);
+	return (*set == c);
 }
 
 size_t	ft_abs(ssize_t nbr)
@@ -36,6 +36,21 @@ size_t	ft_abs(ssize_t nbr)
 	if (nbr < 0)
 		return ((size_t)(nbr * -1));
 	return ((size_t)nbr);
+}
+
+int	ft_atoi_start_to_end(const char *str, int start, int end)
+{
+	int	nbr;
+	int	power;
+
+	nbr = 0;
+	power = 1;
+	while (--end >= start)
+	{
+		nbr += power * (str[end] - '0');
+		power *= 10;
+	}
+	return (nbr);
 }
 /*
 unsigned int	ft_log2(unsigned int n)
@@ -60,18 +75,4 @@ unsigned int	ft_log_base(unsigned int base, unsigned int n)
 	if (log2base == 0)
 		return (0);
     return (log2n / log2base);
-}
-
-unsigned int	ft_pow(unsigned int base, unsigned int exponent)
-{
-	unsigned int	result;
-
-	if (exponent == 0)
-		return (1);
-	if (base == 0)
-		return (0);
-	result = base;
-	while (--exponent)
-		result *= base;
-	return (result);
-} */
+}*/

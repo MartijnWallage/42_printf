@@ -40,6 +40,8 @@ void	ft_print_int(t_print *tab)
 	int	nb;
 
 	nb = va_arg(tab->args, int);
+	if (tab->space)
+		tab->total_len += write(1, " ", 1);
 	tab->total_len += ft_putnbr_base(nb, DEC);
 }
 

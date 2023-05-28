@@ -20,6 +20,8 @@ void	ft_print_hex(t_print *tab)
 	unsigned int	nb;
 
 	nb = va_arg(tab->args, int);
+	if (tab->hash && nb != 0)
+		tab->total_len += write(1, "0x", 2);
 	tab->total_len += ft_putnbr_base(nb, HEX);
 }
 
@@ -28,6 +30,8 @@ void	ft_print_hex_upper(t_print *tab)
 	unsigned int	nb;
 
 	nb = va_arg(tab->args, int);
+	if (tab->hash && nb != 0)
+		tab->total_len += write(1, "0X", 2);
 	tab->total_len += ft_putnbr_base(nb, HEX_UPPER);
 }
 

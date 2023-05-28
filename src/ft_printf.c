@@ -14,6 +14,7 @@
 
 void	ft_init_tab(t_print *tab)
 {
+	tab->hash = 0;
 	tab->width = 0;
 	tab->precision = 0;
 	tab->zero = 0;
@@ -22,20 +23,15 @@ void	ft_init_tab(t_print *tab)
 	tab->total_len = 0;
 	tab->sign = 0;
 	tab->is_zero = 0;
-	tab->percent = 0;
 	tab->space = 0;
 }
 
+/*  %[$][flags][width][.precision][length modifier]conversion */
 int	ft_eval_format(t_print *tab, const char *format, int i)
 {
-	while (!is_in_set(format[i], "udcsupxX%"))
-	{
-		if (format[i] == '.')
-			tab->point = 1;
-		if (format[i] == '-')
-			tab->dash = 1;
-		i++;
-	}
+	i = read_flags(tab, format, i);
+	i = read_width(tab, format, i);
+	i = read_precision(tab, format, i);
 	if (format[i] == 'c')
 		ft_print_char(tab);
 	else if (format[i] == 's')
@@ -65,19 +61,20 @@ int	ft_printf(const char *format, ...)
 	tab = malloc(sizeof(t_print));
 	if (tab == NULL)
 		return (-1);
-	ft_init_tab(tab);
 	va_start(tab->args, format);
 	i = -1;
-	return_value = 0;
 	while (format[++i])
 	{
+		ft_init_tab(tab);
 		if (format[i] == '%')
-			i += ft_eval_format(tab, format, i + 1);
+		{
+			i = ft_eval_format(tab, format, i + 1);
+			return_value += tab->total_len;
+		}
 		else
 			return_value += write(1, &format[i], 1);
 	}
 	va_end(tab->args);
-	return_value += tab->total_len;
 	free(tab);
 	return (return_value);
 }

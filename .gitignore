@@ -1,7 +1,8 @@
 # Test files
-# test*
-# TEST*
-# Test*
+# *test*
+#*TEST*
+# *Test*
+*.json
 
 # Prerequisites
 *.d
