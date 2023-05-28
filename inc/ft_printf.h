@@ -53,10 +53,13 @@ void			ft_print_perc(t_print *tab);
 /* Print conversions */
 unsigned int	ft_putstr(char *str);
 unsigned int	ft_putnbr_base(ssize_t nbr, char *base);
+int				put_padding(t_print *tab, int len);
 /* Utility functions */
 unsigned int	ft_strlen(const char *str);
 size_t			ft_abs(ssize_t nbr);
 int				is_in_set(const char c, const char *set);
 int				ft_atoi_start_to_end(const char *str, int start, int end);
+unsigned int	ft_log_base(unsigned int base, unsigned int n);
+unsigned int	num_digits(ssize_t nbr, int baselen);
 
 #endif

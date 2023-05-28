@@ -23,10 +23,13 @@
 
 void	test_utils(void)
 {
-	int	i, nb;
+	int	i, nb, j;
 
 	for (i = INT_MIN; i < 0; i /= 10)
 		assert((int) ft_abs(i) == abs(i));
+	for (i = INT_MAX, j = 10; i > 0; i /= 10, j--)
+		assert(num_digits(i, 10) == j);
+	printf("\nft_abs(INT_MIN): %li\n", ft_abs(INT_MIN));
 	assert(is_in_set('a', "Hallo"));
 	assert(is_in_set('#', "+-#%x"));
 	assert(!is_in_set('d', "#-'0+ "));
@@ -125,12 +128,33 @@ void	test_bonus(void)
 	assert(ft_printf("\nDec with space: % d\n", INT_MIN)
 	== printf("\nDec with space: % d\n", INT_MIN));
 
-	assert(ft_printf("\nDec with space: % i\n", -1)
-	== printf("\nDec with space: % i\n", -1));
+	assert(ft_printf("\nDec with plus: %+d\n", 1)
+	== printf("\nDec with plus: %+d\n", -1));
+
+	assert(ft_printf("\nDec with plus and space: %+ d\n", 0)
+	== printf("\nDec with plus and space: %+ d\n", 0));
+
+	assert(ft_printf("\nDec with plus and space: %+ d\n", 42)
+	== printf("\nDec with plus and space: %+ d\n", 42));
+
+	assert(ft_printf("\nChar with width: %10c----\n", 'c')
+	== printf("\nChar with width: %10c----\n", 'c'));
+
+	assert(ft_printf("\nStr with width: %10s----\n", "Hi!")
+	== printf("\nStr with width: %10s----\n", "Hi!"));
+
+	assert(ft_printf("\nDec with width: %10d----\n", 42)
+	== printf("\nDec with width: %10d----\n", 42));
+
+	assert(ft_printf("\nDec with width: %10d----\n", -42)
+	== printf("\nDec with width: %10d----\n", -42));
+
+	assert(ft_printf("\nDec with width: %12d----\n", INT_MIN)
+	== printf("\nDec with width: %12d----\n", INT_MIN));
 }
 
 
-int	main(int argc, char *argv[])
+int	main(void)
 {
 	int	nb;
 	int	ret;
@@ -139,30 +163,6 @@ int	main(int argc, char *argv[])
 	printf("\n\033[0;32m************************TEST UTILS****************************\n");
 	printf("\033[0m\n");
 	test_utils();
-	if (argc < 2)
-		return (1);
-	printf("\n\033[0;32m************************SOME TESTS****************************\n");
-	printf("\033[0m\n");
-	str = argv[1];
-	nb = ft_strlen(str);
-	ret = ft_printf("My ft_printf: Here is an int: \t\t%d\n", 0);
-	printf("Return value: \t\t\t%d\n", ret);
-	ret = printf("stdio printf: Here is an int: \t\t%d\n", 0);
-	printf("Return value: \t\t\t%d\n", ret);
-	ret = ft_printf("My ft_printf: Here is an int: \t\t%d\n", 9);
-	printf("Return value: \t\t\t%d\n", ret);
-	ret = printf("stdio printf: Here is an int: \t\t%d\n", 9);
-	printf("Return value: \t\t\t%d\n", ret);
-	ret = ft_printf("My ft_printf: Here is an int: \t\t%d\n", (-1234567890));
-	printf("Return value: \t\t\t%d\n", ret);
-	ret = printf("stdio printf: Here is an int: \t\t%d\n", (-1234567890));
-	printf("Return value: \t\t\t%d\n", ret);
-	ret = ft_printf("My ft_printf: Here is an int: \t\t%d\n", INT_MIN);
-	printf("Return value: \t\t\t%d\n", ret);
-	ret = printf("stdio printf: Here is an int: \t\t%d\n", INT_MIN);
-	printf("Return value: \t\t\t%d\n", ret);
-	ft_printf("My ft_printf: Here is a char: \t\t%c\n", *str);
-	printf("stdio.h printf: Here is a char: \t%d\n", *str);
 	printf("\n\033[0;32m************************TEST CONVERSIONS**********************\n");
 	printf("\033[0m\n");
 	test_conversions();

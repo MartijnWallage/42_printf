@@ -49,10 +49,19 @@ unsigned int	ft_putnbr_base(ssize_t nbr, char *base)
 		return (0);
 	chrs_written = 0;
 	if (nbr < 0 && baselen == 10)
-	{
-		chrs_written += write(1, "-", 1);
 		nbr = ft_abs(nbr);
-	}
 	chrs_written += putnbr_recursion(nbr, base, baselen);
+	return (chrs_written);
+}
+
+int	put_padding(t_print *tab, int len)
+{
+	int	chrs_written;
+
+	chrs_written = 0;
+	while (tab->zero && len--)
+		chrs_written += write(1, "0", 1);
+	while (!tab->zero && len--)
+		chrs_written += write(1, " ", 1);
 	return (chrs_written);
 }
