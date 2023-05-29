@@ -33,8 +33,14 @@ int	is_in_set(const char c, const char *set)
 
 size_t	ft_abs(ssize_t nbr)
 {
+	long long	temp;
+
+	temp = (long long) nbr;
 	if (nbr < 0)
-		return ((size_t)(nbr * -1));
+	{
+		temp = -temp;
+		return ((size_t)temp);
+	}
 	return ((size_t)nbr);
 }
 
@@ -53,24 +59,21 @@ int	ft_atoi_start_to_end(const char *str, int start, int end)
 	return (nbr);
 }
 
-unsigned int	ft_numdigits(size_t nbr, size_t baselen)
+unsigned int	ft_numdigits(size_t nbr, unsigned int baselen)
 {
-	size_t	len;
-	size_t	div;
+	unsigned int	count;
 
-	nbr = ft_abs(nbr);
 	if (baselen < 2)
 		return (0);
-	len = 1;
-	div = 1;
-	while (nbr / div)
+	if (nbr == 0)
+		return (1);
+	count = 0;
+	while (nbr > 0)
 	{
-		len++;
-		div *= baselen;
+		nbr /= baselen;
+		count++;
 	}
-	if (len > 1)
-		len--;
-	return ((unsigned int) len);
+	return (count);
 }
 
 int	ft_min(int a, int b)
@@ -88,41 +91,3 @@ int	ft_max(int a, int b)
 	else
 		return (b);
 }
-
-unsigned int	ft_numlen(t_print *tab, size_t nb, int baselen)
-{
-	unsigned int	len;
-	
-	len = ft_numdigits(nb, 10);
-	tab->precision -= len;
-	if (tab->precision < 0)
-		tab->precision = 0;
-	if (tab->point)
-		len += tab->precision;
-	return (len);
-}
-
-/*
-unsigned int	ft_log2(unsigned int n)
-{
-	unsigned int	result;
-
-	if (n == 0)
-		return (0);
-	result = 0;
-	while (n >>= 1)
-		result++;
-	return (result);
-}
-
-unsigned int	ft_log_base(unsigned int base, unsigned int n)
-{
-	unsigned int	log2n;
-	unsigned int	log2base;
-
-	log2n = ft_log2(n);
-	log2base = ft_log2(base);
-	if (log2base == 0)
-		return (0);
-    return (log2n / log2base);
-}*/

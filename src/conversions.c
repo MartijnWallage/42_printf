@@ -12,8 +12,6 @@
 
 #include "../inc/ft_printf.h"
 
-#define DEC	"0123456789"
-
 void	ft_print_char(t_print *tab)
 {
 	char	c;
@@ -85,7 +83,7 @@ void	ft_print_uns(t_print *tab)
 	int				paddinglen;
 
 	nb = va_arg(tab->args, unsigned int);
-	numlen = ft_numlen(tab, nb, 10);
+	numlen = ft_max(ft_numdigits(nb, 10), tab->precision);
 	paddinglen = tab->width - numlen;
 	if (!tab->dash)
 		tab->len += put_padding(tab, tab->padding, paddinglen);

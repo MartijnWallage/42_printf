@@ -14,10 +14,12 @@
 
 unsigned int	ft_putstr(char *str, int strlen)
 {
-	unsigned int	i;
+	int	i;
 
 	if (str == NULL && strlen >= 6)
 		return (write(1, "(null)", 6));
+	if (str == NULL)
+		return (0);
 	i = -1;
 	while (++i < strlen)
 		write(1, &str[i], 1);

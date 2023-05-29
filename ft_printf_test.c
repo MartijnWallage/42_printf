@@ -24,15 +24,25 @@
 void	test_utils(void)
 {
 	int	i, nb, j;
+	void	*ptr;
+	size_t	ptr_value;
 
 	printf("\n\033[0;32m************************TEST UTILS****************************\n");
 	printf("\033[0m\n");
 	for (i = INT_MIN; i < 0; i /= 10)
 		assert((int) ft_abs(i) == abs(i));
 	for (i = INT_MAX, j = 10; i > 0; i /= 10, j--)
+	{
+		printf("ft_numdigits(%d, 10) == %d", i, ft_numdigits(i, 10));
 		assert(ft_numdigits(i, 10) == j);
+	}
 	for (i = INT_MAX, j = 8; i > 0; i /= 16, j--)
+	{
+		printf("ft_numdigits(%x, 16) == %d", i, ft_numdigits(i, 16));
 		assert(ft_numdigits(i, 16) == j);
+	}
+	printf("ft_numdigits(%x, 16) == %d\n", SIZE_MAX, ft_numdigits(SIZE_MAX, 16));
+	assert(ft_numdigits(SIZE_MAX, 16) == 16);
 	printf("\nft_abs(INT_MIN): %li\n", ft_abs(INT_MIN));
 	assert(is_in_set('a', "Hallo"));
 	assert(is_in_set('#', "+-#%x"));
@@ -218,6 +228,9 @@ void	test_bonus(void)
 
 	assert(ft_printf("\npnt with width: %30p----\n", str)
 		   == printf("\npnt with width: %30p----\n", str));
+
+	assert(ft_printf("\n%-10possible", (void *) -1)
+		   == printf("\n%-10possible", (void *) -1));
 }
 
 

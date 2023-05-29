@@ -12,9 +12,6 @@
 
 #include "../inc/ft_printf.h"
 
-#define HEX_LOWER	"0123456789abcdef"
-#define HEX_UPPER	"0123456789ABCDEF"
-
 void	ft_print_hex(t_print *tab)
 {
 	unsigned int	nb;
@@ -22,7 +19,7 @@ void	ft_print_hex(t_print *tab)
 	unsigned int	paddinglen;
 
 	nb = va_arg(tab->args, unsigned int);
-	numlen = ft_numlen(tab, nb, 16);
+	numlen = ft_max(tab->precision, ft_numdigits(nb, 16));
 	paddinglen = tab->width - numlen - 2 * (tab->hash);
 	if (tab->padding == '0' && tab->hash && nb != 0)
 		tab->len += write(1, "0x", 2);
@@ -34,7 +31,7 @@ void	ft_print_hex(t_print *tab)
 		tab->len += put_padding(tab, '0', tab->precision);
 	tab->len += ft_putnbr_base(nb, HEX_LOWER);
 	if (tab->dash)
-		tab->len += put_padding(tab, tab->padding, paddinglen);
+		tab->len += put_padding(tab, ' ', paddinglen);
 }
 
 void	ft_print_hex_upper(t_print *tab)
@@ -44,7 +41,7 @@ void	ft_print_hex_upper(t_print *tab)
 	unsigned int	paddinglen;
 
 	nb = va_arg(tab->args, unsigned int);
-	numlen = ft_numlen(tab, nb, 16);
+	numlen = ft_max(tab->precision, ft_numdigits(nb, 16));
 	paddinglen = tab->width - numlen - 2 * (tab->hash);
 	if (tab->padding == '0' && tab->hash && nb != 0)
 		tab->len += write(1, "0X", 2);
@@ -56,7 +53,7 @@ void	ft_print_hex_upper(t_print *tab)
 		tab->len += put_padding(tab, '0', tab->precision);
 	tab->len += ft_putnbr_base(nb, HEX_UPPER);
 	if (tab->dash)
-		tab->len += put_padding(tab, tab->padding, paddinglen);
+		tab->len += put_padding(tab, ' ', paddinglen);
 }
 
 void	ft_print_pnt(t_print *tab)
@@ -66,8 +63,8 @@ void	ft_print_pnt(t_print *tab)
 	int		paddinglen;
 	int		numlen;
 
-	nb = va_arg(tab->args, size_t);
-	if (nb == 0)
+	ptr = va_arg(tab->args, void *);
+	if (ptr == NULL)
 	{
 		paddinglen = ft_max(0, tab->width - 5);
 		if (!tab->dash)
@@ -77,7 +74,11 @@ void	ft_print_pnt(t_print *tab)
 			tab->len += put_padding(tab, ' ', paddinglen);
 		return ;
 	}
-	numlen = ft_max(tab->precision, ft_numdigits(nb, 16)) + 2;
+	nb = (size_t) ptr;
+	if (nb < 0)
+		numlen = 18;
+	else
+		numlen = ft_max(tab->precision, ft_numdigits(nb, 16)) + 2;
 	paddinglen = ft_max(0, tab->width - numlen);
 	if (tab->padding == '0')
 		tab->len += write(1, "0x", 2);
@@ -89,5 +90,5 @@ void	ft_print_pnt(t_print *tab)
 		tab->len += put_padding(tab, '0', tab->precision);
 	tab->len += ft_putnbr_base(nb, HEX_LOWER);
 	if (tab->dash)
-		tab->len += put_padding(tab, tab->padding, paddinglen);
+		tab->len += put_padding(tab, ' ', paddinglen);
 }

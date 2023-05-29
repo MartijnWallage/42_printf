@@ -3,6 +3,7 @@
 #*TEST*
 # *Test*
 *.json
+santana/*
 
 # Prerequisites
 *.d

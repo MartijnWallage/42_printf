@@ -17,7 +17,12 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
+# include <stdint.h>
 # include <stdio.h>
+
+#define DEC			"0123456789"
+#define HEX_LOWER	"0123456789abcdef"
+#define HEX_UPPER	"0123456789ABCDEF"
 
 typedef struct s_print
 {
@@ -60,9 +65,8 @@ unsigned int	ft_strlen(const char *str);
 size_t			ft_abs(ssize_t nbr);
 int				is_in_set(const char c, const char *set);
 int				ft_atoi_start_to_end(const char *str, int start, int end);
-unsigned int	ft_numdigits(size_t nbr, size_t baselen);
+unsigned int	ft_numdigits(size_t nbr, unsigned int baselen);
 int				ft_min(int a, int b);
 int				ft_max(int a, int b);
-unsigned int	ft_numlen(t_print *tab, size_t nb, int baselen);
 
 #endif
