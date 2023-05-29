@@ -22,10 +22,10 @@ void	ft_print_char(t_print *tab)
 	c = va_arg(tab->args, int);
 	padding_len = tab->width - 1;
 	if (padding_len > 0 && !tab->dash)
-		tab->total_len += put_padding(tab, padding_len);
+		tab->total_len += put_padding(tab, ' ', padding_len);
 	tab->total_len += write(1, &c, 1);
 	if (padding_len > 0 && tab->dash)
-		tab->total_len += put_padding(tab, padding_len);
+		tab->total_len += put_padding(tab, ' ', padding_len);
 }
 
 void	ft_print_str(t_print *tab)
@@ -34,7 +34,6 @@ void	ft_print_str(t_print *tab)
 	int		padding_len;
 	int		strlen;
 
-	tab->zero = 0;
 	str = va_arg(tab->args, char *);
 	if (str == NULL)
 	{
@@ -46,16 +45,17 @@ void	ft_print_str(t_print *tab)
 		strlen = ft_min(strlen, tab->precision);
 	padding_len = tab->width - strlen;
 	if (padding_len > 0 && !tab->dash)
-		tab->total_len += put_padding(tab, padding_len);
+		tab->total_len += put_padding(tab, ' ', padding_len);
 	tab->total_len += ft_putstr(str, strlen);
 	if (padding_len > 0 && tab->dash)
-		tab->total_len += put_padding(tab, padding_len);
+		tab->total_len += put_padding(tab, ' ', padding_len);
 }
 
 void	ft_print_int(t_print *tab)
 {
 	int				nb;
 	int				len;
+	int				padding_len;
 	unsigned int	unb;
 
 	nb = va_arg(tab->args, int);
@@ -63,22 +63,24 @@ void	ft_print_int(t_print *tab)
 	unb = (unsigned int)nb;
 	if (tab->neg)
 		unb = (unsigned int)-nb;
-	if (tab->zero)
+	if (tab->padding == '0')
 		tab->total_len += put_sign_or_space(tab);
-	len = tab->width - num_digits(unb, 10) - (tab->neg || tab->space || tab->sign);
+	len = num_digits(unb, 10);
+	tab->precision -= len;
+	if (tab->precision < 0)
+		tab->precision = 0;
+	if (tab->point)
+		len += tab->precision;
+	padding_len = tab->width - len - (tab->neg || tab->space || tab->sign);
 	if (len > 0 && !tab->dash)
-		tab->total_len += put_padding(tab, len);
-	if (!tab->zero)
+		tab->total_len += put_padding(tab, tab->padding, padding_len);
+	if (tab->padding == ' ')
 		tab->total_len += put_sign_or_space(tab);
 	if (tab->point)
-	{
-		tab->zero = 1;
-		tab->total_len += put_padding(tab, tab->precision - num_digits(unb, 10));
-		tab->zero = 0;
-	}
+		tab->total_len += put_padding(tab, '0', tab->precision);
 	tab->total_len += ft_putnbr_base(nb, DEC);
 	if (len > 0 && tab->dash)
-		tab->total_len += put_padding(tab, len);
+		tab->total_len += put_padding(tab, tab->padding, padding_len);
 }
 
 void	ft_print_und(t_print *tab)

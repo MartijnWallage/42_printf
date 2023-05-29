@@ -9,14 +9,15 @@ int	read_flags(t_print *tab, const char *format, int i)
 		else if (format[i] == '-')
 			tab->dash = 1;
 		else if (format[i] == '0')
-			tab->zero = 1;
+			tab->padding = '0';
 		else if (format[i] == '+')
 			tab->sign = 1;
 		else if (format[i] == ' ')
 			tab->space = 1;
 		i++;
 	}
-	tab->zero = tab->zero && !tab->dash && !tab->point;
+	if (tab->dash || tab->point)
+		tab->padding = ' ';
 	tab->space = tab->space && !tab->sign;
 	return (i);
 }

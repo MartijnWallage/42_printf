@@ -25,7 +25,7 @@ typedef struct s_print
 	int		hash;
 	int		width;
 	int		precision;
-	int		zero;
+	char	padding;
 	int		point;
 	int		dash;
 	int		total_len;
@@ -53,7 +53,7 @@ void			ft_print_perc(t_print *tab);
 /* Print conversions */
 unsigned int	ft_putstr(char *str, int strlen);
 unsigned int	ft_putnbr_base(ssize_t nbr, char *base);
-int				put_padding(t_print *tab, int len);
+int				put_padding(t_print *tab, char c, int len);
 int				put_sign_or_space(t_print *tab);
 /* Utility functions */
 unsigned int	ft_strlen(const char *str);

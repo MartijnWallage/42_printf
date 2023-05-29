@@ -51,18 +51,14 @@ unsigned int	ft_putnbr_base(ssize_t nbr, char *base)
 	return (chrs_written);
 }
 
-int	put_padding(t_print *tab, int len)
+int	put_padding(t_print *tab, char c, int len)
 {
-	int	chrs_written;
+	int	chars_written;
 
-	if (len <= 0)
-		return (0);
-	chrs_written = 0;
-	while (tab->zero && len--)
-		chrs_written += write(1, "0", 1);
-	while (!tab->zero && len--)
-		chrs_written += write(1, " ", 1);
-	return (chrs_written);
+	chars_written = 0;
+	while (len-- > 0)
+		chars_written += write(1, &c, 1);
+	return (chars_written);
 }
 
 int	put_sign_or_space(t_print *tab)

@@ -17,7 +17,7 @@ void	ft_init_tab(t_print *tab)
 	tab->hash = 0;
 	tab->width = 0;
 	tab->precision = 0;
-	tab->zero = 0;
+	tab->padding = ' ';
 	tab->point = 0;
 	tab->dash = 0;
 	tab->total_len = 0;
