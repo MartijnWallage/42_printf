@@ -6,7 +6,7 @@
 /*   By: mwallage <mwallage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 14:34:02 by mwallage          #+#    #+#             */
-/*   Updated: 2023/05/29 16:10:03 by mwallage         ###   ########.fr       */
+/*   Updated: 2023/05/29 18:10:06 by mwallage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_print
 	char	padding;
 	int		point;
 	int		dash;
-	int		total_len;
+	int		len;
 	int		sign;
 	int		space;
 	int		neg;
@@ -60,7 +60,7 @@ unsigned int	ft_strlen(const char *str);
 size_t			ft_abs(ssize_t nbr);
 int				is_in_set(const char c, const char *set);
 int				ft_atoi_start_to_end(const char *str, int start, int end);
-unsigned int	ft_numdigits(size_t nbr, int baselen);
+unsigned int	ft_numdigits(size_t nbr, size_t baselen);
 int				ft_min(int a, int b);
 int				ft_max(int a, int b);
 unsigned int	ft_numlen(t_print *tab, size_t nb, int baselen);

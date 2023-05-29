@@ -6,7 +6,7 @@
 /*   By: mwallage <mwallage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 18:22:36 by mwallage          #+#    #+#             */
-/*   Updated: 2023/05/29 16:50:50 by mwallage         ###   ########.fr       */
+/*   Updated: 2023/05/29 17:46:09 by mwallage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,12 @@ int	ft_atoi_start_to_end(const char *str, int start, int end)
 	return (nbr);
 }
 
-unsigned int	ft_numdigits(size_t nbr, int baselen)
+unsigned int	ft_numdigits(size_t nbr, size_t baselen)
 {
-	unsigned int	len;
-	size_t			div;
+	size_t	len;
+	size_t	div;
 
+	nbr = ft_abs(nbr);
 	if (baselen < 2)
 		return (0);
 	len = 1;
@@ -69,7 +70,7 @@ unsigned int	ft_numdigits(size_t nbr, int baselen)
 	}
 	if (len > 1)
 		len--;
-	return (len);
+	return ((unsigned int) len);
 }
 
 int	ft_min(int a, int b)

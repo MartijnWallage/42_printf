@@ -6,7 +6,7 @@
 /*   By: mwallage <mwallage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:07:39 by mwallage          #+#    #+#             */
-/*   Updated: 2023/05/29 15:46:58 by mwallage         ###   ########.fr       */
+/*   Updated: 2023/05/29 18:10:14 by mwallage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_init_tab(t_print *tab)
 	tab->padding = ' ';
 	tab->point = 0;
 	tab->dash = 0;
-	tab->total_len = 0;
+	tab->len = 0;
 	tab->sign = 0;
 	tab->space = 0;
 	tab->neg = 0;
@@ -69,7 +69,7 @@ int	ft_printf(const char *format, ...)
 		if (format[i] == '%')
 		{
 			i = ft_eval_format(tab, format, i + 1);
-			return_value += tab->total_len;
+			return_value += tab->len;
 		}
 		else
 			return_value += write(1, &format[i], 1);
