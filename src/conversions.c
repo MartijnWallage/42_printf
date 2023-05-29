@@ -6,7 +6,7 @@
 /*   By: mwallage <mwallage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 13:33:57 by mwallage          #+#    #+#             */
-/*   Updated: 2023/05/27 18:45:12 by mwallage         ###   ########.fr       */
+/*   Updated: 2023/05/29 16:09:30 by mwallage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,45 +17,42 @@
 void	ft_print_char(t_print *tab)
 {
 	char	c;
-	int		padding_len;
+	int		paddinglen;
 
 	c = va_arg(tab->args, int);
-	padding_len = tab->width - 1;
-	if (padding_len > 0 && !tab->dash)
-		tab->total_len += put_padding(tab, ' ', padding_len);
+	paddinglen = tab->width - 1;
+	if (paddinglen > 0 && !tab->dash)
+		tab->total_len += put_padding(tab, ' ', paddinglen);
 	tab->total_len += write(1, &c, 1);
-	if (padding_len > 0 && tab->dash)
-		tab->total_len += put_padding(tab, ' ', padding_len);
+	if (paddinglen > 0 && tab->dash)
+		tab->total_len += put_padding(tab, ' ', paddinglen);
 }
 
 void	ft_print_str(t_print *tab)
 {
 	char	*str;
-	int		padding_len;
+	int		paddinglen;
 	int		strlen;
 
 	str = va_arg(tab->args, char *);
-	if (str == NULL)
-	{
-		tab->total_len += write(1, "(null)", 6);
-		return ;
-	}
 	strlen = ft_strlen(str);
+	if (str == NULL)
+		strlen = 6;
 	if (tab->point)
 		strlen = ft_min(strlen, tab->precision);
-	padding_len = tab->width - strlen;
-	if (padding_len > 0 && !tab->dash)
-		tab->total_len += put_padding(tab, ' ', padding_len);
+	paddinglen = tab->width - strlen;
+	if (paddinglen > 0 && !tab->dash)
+		tab->total_len += put_padding(tab, ' ', paddinglen);
 	tab->total_len += ft_putstr(str, strlen);
-	if (padding_len > 0 && tab->dash)
-		tab->total_len += put_padding(tab, ' ', padding_len);
+	if (paddinglen > 0 && tab->dash)
+		tab->total_len += put_padding(tab, ' ', paddinglen);
 }
 
 void	ft_print_int(t_print *tab)
 {
 	int				nb;
-	int				len;
-	int				padding_len;
+	int				numlen;
+	int				paddinglen;
 	unsigned int	unb;
 
 	nb = va_arg(tab->args, int);
@@ -65,30 +62,35 @@ void	ft_print_int(t_print *tab)
 		unb = (unsigned int)-nb;
 	if (tab->padding == '0')
 		tab->total_len += put_sign_or_space(tab);
-	len = num_digits(unb, 10);
-	tab->precision -= len;
-	if (tab->precision < 0)
-		tab->precision = 0;
-	if (tab->point)
-		len += tab->precision;
-	padding_len = tab->width - len - (tab->neg || tab->space || tab->sign);
-	if (len > 0 && !tab->dash)
-		tab->total_len += put_padding(tab, tab->padding, padding_len);
+	numlen = ft_numlen(tab, unb, 10);
+	paddinglen = tab->width - numlen - (tab->neg || tab->space || tab->sign);
+	if (!tab->dash)
+		tab->total_len += put_padding(tab, tab->padding, paddinglen);
 	if (tab->padding == ' ')
 		tab->total_len += put_sign_or_space(tab);
 	if (tab->point)
 		tab->total_len += put_padding(tab, '0', tab->precision);
-	tab->total_len += ft_putnbr_base(nb, DEC);
-	if (len > 0 && tab->dash)
-		tab->total_len += put_padding(tab, tab->padding, padding_len);
+	tab->total_len += ft_putnbr_base(unb, DEC);
+	if (tab->dash)
+		tab->total_len += put_padding(tab, tab->padding, paddinglen);
 }
 
-void	ft_print_und(t_print *tab)
+void	ft_print_uns(t_print *tab)
 {
 	unsigned int	nb;
+	int				numlen;
+	int				paddinglen;
 
 	nb = va_arg(tab->args, unsigned int);
+	numlen = ft_numlen(tab, nb, 10);
+	paddinglen = tab->width - numlen;
+	if (!tab->dash)
+		tab->total_len += put_padding(tab, tab->padding, paddinglen);
+	if (tab->point)
+		tab->total_len += put_padding(tab, '0', tab->precision);
 	tab->total_len += ft_putnbr_base(nb, DEC);
+	if (tab->dash)
+		tab->total_len += put_padding(tab, tab->padding, paddinglen);
 }
 
 void	ft_print_perc(t_print *tab)

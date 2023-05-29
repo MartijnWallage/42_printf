@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_utils.c                                  :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mwallage <mwallage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 18:22:36 by mwallage          #+#    #+#             */
-/*   Updated: 2023/05/27 20:25:39 by mwallage         ###   ########.fr       */
+/*   Updated: 2023/05/29 16:50:50 by mwallage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	ft_atoi_start_to_end(const char *str, int start, int end)
 	return (nbr);
 }
 
-unsigned int	num_digits(size_t nbr, int baselen)
+unsigned int	ft_numdigits(size_t nbr, int baselen)
 {
 	unsigned int	len;
 	size_t			div;
@@ -79,6 +79,28 @@ int	ft_min(int a, int b)
 	else
 		return (b);
 }
+
+int	ft_max(int a, int b)
+{
+	if (a >= b)
+		return (a);
+	else
+		return (b);
+}
+
+unsigned int	ft_numlen(t_print *tab, size_t nb, int baselen)
+{
+	unsigned int	len;
+	
+	len = ft_numdigits(nb, 10);
+	tab->precision -= len;
+	if (tab->precision < 0)
+		tab->precision = 0;
+	if (tab->point)
+		len += tab->precision;
+	return (len);
+}
+
 /*
 unsigned int	ft_log2(unsigned int n)
 {

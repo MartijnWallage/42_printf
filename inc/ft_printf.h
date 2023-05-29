@@ -6,7 +6,7 @@
 /*   By: mwallage <mwallage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 14:34:02 by mwallage          #+#    #+#             */
-/*   Updated: 2023/05/27 18:45:55 by mwallage         ###   ########.fr       */
+/*   Updated: 2023/05/29 16:10:03 by mwallage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void			ft_print_char(t_print *tab);
 void			ft_print_str(t_print *tab);
 void			ft_print_pnt(t_print *tab);
 void			ft_print_int(t_print *tab);
-void			ft_print_und(t_print *tab);
+void			ft_print_uns(t_print *tab);
 void			ft_print_hex(t_print *tab);
 void			ft_print_hex_upper(t_print *tab);
 void			ft_print_perc(t_print *tab);
@@ -60,7 +60,9 @@ unsigned int	ft_strlen(const char *str);
 size_t			ft_abs(ssize_t nbr);
 int				is_in_set(const char c, const char *set);
 int				ft_atoi_start_to_end(const char *str, int start, int end);
-unsigned int	num_digits(size_t nbr, int baselen);
+unsigned int	ft_numdigits(size_t nbr, int baselen);
 int				ft_min(int a, int b);
+int				ft_max(int a, int b);
+unsigned int	ft_numlen(t_print *tab, size_t nb, int baselen);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mwallage <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mwallage <mwallage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:07:39 by mwallage          #+#    #+#             */
-/*   Updated: 2023/05/26 15:30:39 by mwallage         ###   ########.fr       */
+/*   Updated: 2023/05/29 15:46:58 by mwallage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	ft_eval_format(t_print *tab, const char *format, int i)
 	else if (format[i] == 'd' || format[i] == 'i')
 		ft_print_int(tab);
 	else if (format[i] == 'u')
-		ft_print_und(tab);
+		ft_print_uns(tab);
 	else if (format[i] == 'x')
 		ft_print_hex(tab);
 	else if (format[i] == 'X')

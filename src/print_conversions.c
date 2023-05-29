@@ -6,7 +6,7 @@
 /*   By: mwallage <mwallage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 18:28:34 by mwallage          #+#    #+#             */
-/*   Updated: 2023/05/27 20:23:20 by mwallage         ###   ########.fr       */
+/*   Updated: 2023/05/29 15:24:22 by mwallage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ unsigned int	ft_putstr(char *str, int strlen)
 {
 	unsigned int	i;
 
+	if (str == NULL && strlen >= 6)
+		return (write(1, "(null)", 6));
 	i = -1;
 	while (++i < strlen)
 		write(1, &str[i], 1);
