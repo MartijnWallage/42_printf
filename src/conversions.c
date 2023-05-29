@@ -32,49 +32,50 @@ void	ft_print_str(t_print *tab)
 {
 	char	*str;
 	int		padding_len;
+	int		strlen;
 
+	tab->zero = 0;
 	str = va_arg(tab->args, char *);
 	if (str == NULL)
 	{
 		tab->total_len += write(1, "(null)", 6);
 		return ;
 	}
-	padding_len = tab->width - ft_strlen(str);
+	strlen = ft_strlen(str);
+	if (tab->point)
+		strlen = ft_min(strlen, tab->precision);
+	padding_len = tab->width - strlen;
 	if (padding_len > 0 && !tab->dash)
 		tab->total_len += put_padding(tab, padding_len);
-	tab->total_len += ft_putstr(str);
+	tab->total_len += ft_putstr(str, strlen);
 	if (padding_len > 0 && tab->dash)
 		tab->total_len += put_padding(tab, padding_len);
 }
 
 void	ft_print_int(t_print *tab)
 {
-	int	nb;
-	int	len;
+	int				nb;
+	int				len;
+	unsigned int	unb;
 
 	nb = va_arg(tab->args, int);
-	len = num_digits(nb, 10);
-	if (nb == INT_MIN)
-		printf("\n%d has %d digits\n", INT_MIN, len);
-	if (tab->sign && nb >= 0)
-	{
-		tab->total_len += write(1, "+", 1);
-		len++;
-	}
-	else if (tab->space && nb >= 0)
-	{
-		tab->total_len += write(1, " ", 1);
-		len++;
-	}
-	else if (nb < 0 && tab->zero)
-		tab->total_len += write(1, "-", 1);
-	if (nb < 0)
-		len++;
-	len = tab->width - len;
+	tab->neg = nb < 0;
+	unb = (unsigned int)nb;
+	if (tab->neg)
+		unb = (unsigned int)-nb;
+	if (tab->zero)
+		tab->total_len += put_sign_or_space(tab);
+	len = tab->width - num_digits(unb, 10) - (tab->neg || tab->space || tab->sign);
 	if (len > 0 && !tab->dash)
 		tab->total_len += put_padding(tab, len);
-	if (nb < 0 && !tab->zero)
-		tab->total_len += write(1, "-", 1);
+	if (!tab->zero)
+		tab->total_len += put_sign_or_space(tab);
+	if (tab->point)
+	{
+		tab->zero = 1;
+		tab->total_len += put_padding(tab, tab->precision - num_digits(unb, 10));
+		tab->zero = 0;
+	}
 	tab->total_len += ft_putnbr_base(nb, DEC);
 	if (len > 0 && tab->dash)
 		tab->total_len += put_padding(tab, len);

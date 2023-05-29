@@ -12,17 +12,14 @@
 
 #include "../inc/ft_printf.h"
 
-unsigned int	ft_putstr(char *str)
+unsigned int	ft_putstr(char *str, int strlen)
 {
-	unsigned int	chrs_written;
+	unsigned int	i;
 
-	chrs_written = 0;
-	while (*str)
-	{
-		chrs_written += write(1, str, 1);
-		str++;
-	}
-	return (chrs_written);
+	i = -1;
+	while (++i < strlen)
+		write(1, &str[i], 1);
+	return (i);
 }
 
 static unsigned int	putnbr_recursion(size_t nbr, char *base,
@@ -58,10 +55,26 @@ int	put_padding(t_print *tab, int len)
 {
 	int	chrs_written;
 
+	if (len <= 0)
+		return (0);
 	chrs_written = 0;
 	while (tab->zero && len--)
 		chrs_written += write(1, "0", 1);
 	while (!tab->zero && len--)
 		chrs_written += write(1, " ", 1);
 	return (chrs_written);
+}
+
+int	put_sign_or_space(t_print *tab)
+{
+	int chars_written;
+
+	chars_written = 0;
+	if (tab->neg)
+		chars_written += write(1, "-", 1);
+	else if (tab->sign)
+		chars_written += write(1, "+", 1);
+	else if (tab->space)
+		chars_written += write(1, " ", 1);
+	return (chars_written);
 }

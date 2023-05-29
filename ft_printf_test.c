@@ -151,6 +151,30 @@ void	test_bonus(void)
 
 	assert(ft_printf("\nDec with width: %12d----\n", INT_MIN)
 	== printf("\nDec with width: %12d----\n", INT_MIN));
+
+	assert(ft_printf("\nDec with width: %-12d----\n", 42)
+	== printf("\nDec with width: %-12d----\n", 42));
+
+	assert(ft_printf("\nDec with width: %012d----\n", 42)
+	== printf("\nDec with width: %012d----\n", 42));
+
+	assert(ft_printf("\nDec with width: %012d----\n", -42)
+	== printf("\nDec with width: %012d----\n", -42));
+
+	assert(ft_printf("\nStr with precision of 2: %.2s----\n", "Hello")
+	== printf("\nStr with precision of 2: %.2s----\n", "Hello"));
+
+	assert(ft_printf("\nStr with precision and padding: %10.2s----\n", "Hello")
+	== printf("\nStr with precision and padding: %10.2s----\n", "Hello"));
+
+	assert(ft_printf("\nStr with zero padding: %010s----\n", "Hello")
+	== printf("\nStr with zero padding: %010s----\n", "Hello"));
+
+	assert(ft_printf("\nStr with space: % s----\n", "Hello")
+	== printf("\nStr with space: % s----\n", "Hello"));
+
+	assert(ft_printf("\nDec with precision: %10.3d----\n", -42)
+	== printf("\nDec with precision: %10.3d----\n", -42));
 }
 
 

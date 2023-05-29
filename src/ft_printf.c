@@ -22,8 +22,8 @@ void	ft_init_tab(t_print *tab)
 	tab->dash = 0;
 	tab->total_len = 0;
 	tab->sign = 0;
-	tab->is_zero = 0;
 	tab->space = 0;
+	tab->neg = 0;
 }
 
 /*  %[$][flags][width][.precision][length modifier]conversion */

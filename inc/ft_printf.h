@@ -30,8 +30,8 @@ typedef struct s_print
 	int		dash;
 	int		total_len;
 	int		sign;
-	int		is_zero;
 	int		space;
+	int		neg;
 }				t_print;
 
 int				ft_printf(const char *format, ...);
@@ -51,15 +51,16 @@ void			ft_print_hex(t_print *tab);
 void			ft_print_hex_upper(t_print *tab);
 void			ft_print_perc(t_print *tab);
 /* Print conversions */
-unsigned int	ft_putstr(char *str);
+unsigned int	ft_putstr(char *str, int strlen);
 unsigned int	ft_putnbr_base(ssize_t nbr, char *base);
 int				put_padding(t_print *tab, int len);
+int				put_sign_or_space(t_print *tab);
 /* Utility functions */
 unsigned int	ft_strlen(const char *str);
 size_t			ft_abs(ssize_t nbr);
 int				is_in_set(const char c, const char *set);
 int				ft_atoi_start_to_end(const char *str, int start, int end);
-unsigned int	ft_log_base(unsigned int base, unsigned int n);
-unsigned int	num_digits(ssize_t nbr, int baselen);
+unsigned int	num_digits(size_t nbr, int baselen);
+int				ft_min(int a, int b);
 
 #endif

@@ -53,6 +53,33 @@ int	ft_atoi_start_to_end(const char *str, int start, int end)
 	return (nbr);
 }
 
+unsigned int	num_digits(size_t nbr, int baselen)
+{
+	unsigned int	len;
+	size_t			div;
+
+	if (baselen < 2)
+		return (0);
+	len = 1;
+	div = 1;
+	while (nbr / div)
+	{
+		len++;
+		div *= baselen;
+	}
+	if (len > 1)
+		len--;
+	return (len);
+}
+
+int	ft_min(int a, int b)
+{
+	if (a <= b)
+		return (a);
+	else
+		return (b);
+}
+/*
 unsigned int	ft_log2(unsigned int n)
 {
 	unsigned int	result;
@@ -75,22 +102,4 @@ unsigned int	ft_log_base(unsigned int base, unsigned int n)
 	if (log2base == 0)
 		return (0);
     return (log2n / log2base);
-}
-
-unsigned int	num_digits(ssize_t nbr, int baselen)
-{
-	return (ft_log_base(baselen, ft_abs(nbr)) + 1);
-/*	unsigned int	len;
-	unsigned int	div;
-
-	len = 1;
-	div = 1;
-	while (nbr / div)
-	{
-		len++;
-		div *= baselen;
-	}
-	if (len > 1)
-		len--;
-	return (len);*/
-}
+}*/
