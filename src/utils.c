@@ -73,6 +73,11 @@ unsigned int	ft_numdigits(size_t nbr, unsigned int baselen)
 		nbr /= baselen;
 		count++;
 	}
+	while (nbr < 0)
+	{
+		nbr /= baselen;
+		count++;
+	}
 	return (count);
 }
 

@@ -134,6 +134,7 @@ void	test_conversions(void)
 
 void	test_bonus(void)
 {
+	int		nb, nb2;
 	char	*str = "Hello world!";
 	
 	printf("\n\033[0;32m************************TEST BONUS**********************\n");
@@ -206,7 +207,7 @@ void	test_bonus(void)
 		   == printf("\nNULL str with padding: %10s\n", NULL));
 
 	assert(ft_printf("\nNULL str with padding and precision: %10.3s\n", NULL)
-		   == printf("\nNULL str with padding and precision: %10.3s\n", NULL));
+		   == (printf("\nNULL str with padding and precision: %10.3s\n", NULL)));
 
 	assert(ft_printf("\nNULL str with padding and precision: %10.7s\n", NULL)
 		   == printf("\nNULL str with padding and precision: %10.7s\n", NULL));
@@ -220,6 +221,9 @@ void	test_bonus(void)
 	assert(ft_printf("\nUnsigned dec with padding and precision: %10.3u----\n", 42)
 		   == printf("\nUnsigned dec with padding and precision: %10.3u----\n", 42));
 
+	assert(ft_printf("\nUnsigned 0 with zero precision: %01.u\n", 0) 
+		   == printf("\nUnsigned 0 with zero precision: %01.u\n", 0));
+
 	assert(ft_printf("\nhex with padding and precision: %10.3x----\n", 42)
 		   == printf("\nhex with padding and precision: %10.3x----\n", 42));
 
@@ -228,6 +232,12 @@ void	test_bonus(void)
 
 	assert(ft_printf("\npnt with width: %30p----\n", str)
 		   == printf("\npnt with width: %30p----\n", str));
+
+	assert(ft_printf("\nNeg pnt with width: %30p----\n", (void *)-42)
+		   == printf("\nNeg pnt with width: %30p----\n", (void *)-42));
+
+	assert(ft_printf("\nNeg pnt with precision: %.20p----\n", (void *)-42)
+		   == printf("\nNeg pnt with precision: %.20p----\n", (void *)-42));
 
 	assert(ft_printf("\n%-10possible", (void *) -1)
 		   == printf("\n%-10possible", (void *) -1));

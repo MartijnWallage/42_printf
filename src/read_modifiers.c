@@ -16,7 +16,7 @@ int	read_flags(t_print *tab, const char *format, int i)
 			tab->space = 1;
 		i++;
 	}
-	if (tab->dash || tab->point)
+	if (tab->dash)
 		tab->padding = ' ';
 	tab->space = tab->space && !tab->sign;
 	return (i);
@@ -43,6 +43,7 @@ int	read_precision(t_print *tab, const char *format, int i)
 
 	if (format[i] == '.')
 	{
+		tab->padding = ' ';
 		tab->point = 1;
 		i++;
 		end = i;

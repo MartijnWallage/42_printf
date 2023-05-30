@@ -43,9 +43,9 @@ int	ft_eval_format(t_print *tab, const char *format, int i)
 	else if (format[i] == 'u')
 		ft_print_uns(tab);
 	else if (format[i] == 'x')
-		ft_print_hex(tab);
+		ft_print_hex(tab, HEX_LOWER, "0x");
 	else if (format[i] == 'X')
-		ft_print_hex_upper(tab);
+		ft_print_hex(tab, HEX_UPPER, "0X");
 	else if (format[i] == '%')
 		ft_print_perc(tab);
 	return (i);

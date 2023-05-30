@@ -52,8 +52,7 @@ void			ft_print_str(t_print *tab);
 void			ft_print_pnt(t_print *tab);
 void			ft_print_int(t_print *tab);
 void			ft_print_uns(t_print *tab);
-void			ft_print_hex(t_print *tab);
-void			ft_print_hex_upper(t_print *tab);
+void			ft_print_hex(t_print *tab, char *base, char *zerox);
 void			ft_print_perc(t_print *tab);
 /* Print conversions */
 unsigned int	ft_putstr(char *str, int strlen);
