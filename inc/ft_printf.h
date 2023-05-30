@@ -6,7 +6,7 @@
 /*   By: mwallage <mwallage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 14:34:02 by mwallage          #+#    #+#             */
-/*   Updated: 2023/05/30 18:23:22 by mwallage         ###   ########.fr       */
+/*   Updated: 2023/05/30 19:49:10 by mwallage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@
 # include <stdarg.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include <limits.h>
-# include <stdint.h>
-# include <stdio.h>
 
 # define DEC		"0123456789"
 # define HEX_LOWER	"0123456789abcdef"
@@ -65,7 +62,6 @@ int				put_padding(t_print *tab, char c, int len);
 int				put_sign_or_space(t_print *tab);
 /* Utility functions */
 unsigned int	ft_strlen(const char *str);
-size_t			ft_abs(ssize_t nbr);
 int				is_in_set(const char c, const char *set);
 int				ft_min(int a, int b);
 int				ft_max(int a, int b);

@@ -6,7 +6,7 @@
 /*   By: mwallage <mwallage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 18:22:36 by mwallage          #+#    #+#             */
-/*   Updated: 2023/05/30 18:21:00 by mwallage         ###   ########.fr       */
+/*   Updated: 2023/05/30 19:33:35 by mwallage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,6 @@ int	is_in_set(const char c, const char *set)
 	while (*set && *set != c)
 		set++;
 	return (*set == c);
-}
-
-size_t	ft_abs(ssize_t nbr)
-{
-	long long	temp;
-
-	temp = (long long) nbr;
-	if (nbr < 0)
-	{
-		temp = -temp;
-		return ((size_t)temp);
-	}
-	return ((size_t)nbr);
 }
 
 int	ft_min(int a, int b)

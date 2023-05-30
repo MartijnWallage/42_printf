@@ -6,7 +6,7 @@
 /*   By: mwallage <mwallage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 18:28:34 by mwallage          #+#    #+#             */
-/*   Updated: 2023/05/30 18:21:51 by mwallage         ###   ########.fr       */
+/*   Updated: 2023/05/30 19:42:39 by mwallage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,16 @@ unsigned int	ft_putnbr_base(ssize_t nbr, char *base)
 {
 	unsigned int	chrs_written;
 	unsigned int	baselen;
+	size_t			nb;
 
 	baselen = ft_strlen(base);
 	if (baselen < 2)
 		return (0);
 	chrs_written = 0;
+	nb = (size_t)nbr;
 	if (nbr < 0 && baselen == 10)
-		nbr = ft_abs(nbr);
-	chrs_written += putnbr_recursion(nbr, base, baselen);
+		nb = (size_t)-nbr;
+	chrs_written += putnbr_recursion(nb, base, baselen);
 	return (chrs_written);
 }
 
