@@ -6,7 +6,7 @@
 /*   By: mwallage <mwallage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 13:33:57 by mwallage          #+#    #+#             */
-/*   Updated: 2023/05/29 18:59:15 by mwallage         ###   ########.fr       */
+/*   Updated: 2023/05/30 19:14:42 by mwallage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,20 +48,16 @@ void	ft_print_str(t_print *tab)
 
 void	ft_print_int(t_print *tab)
 {
-	int				nb;
 	int				numlen;
 	int				numdigits;
 	int				paddinglen;
 	unsigned int	unb;
 
-	nb = va_arg(tab->args, int);
-	tab->neg = nb < 0;
-	unb = (unsigned int)nb;
-	if (tab->neg)
-		unb = (unsigned int)-nb;
+	unb = get_unsigned_int(tab);
 	numdigits = ft_numdigits(unb, 10);
-	numlen = ft_max(numdigits, tab->precision) + (tab->neg || tab->space || tab->sign);
-	if (nb == 0 && tab->point && !tab->precision)
+	numlen = ft_max(numdigits, tab->precision)
+		+ (tab->neg || tab->space || tab->sign);
+	if (unb == 0 && tab->point && !tab->precision)
 		numlen = 0;
 	paddinglen = ft_max(0, tab->width - numlen);
 	if (tab->padding == '0')

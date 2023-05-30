@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_conversions.c                                :+:      :+:    :+:   */
+/*   put_conversions.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mwallage <mwallage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 18:28:34 by mwallage          #+#    #+#             */
-/*   Updated: 2023/05/29 15:24:22 by mwallage         ###   ########.fr       */
+/*   Updated: 2023/05/30 18:21:51 by mwallage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	put_padding(t_print *tab, char c, int len)
 
 int	put_sign_or_space(t_print *tab)
 {
-	int chars_written;
+	int	chars_written;
 
 	chars_written = 0;
 	if (tab->neg)

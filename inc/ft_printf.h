@@ -6,7 +6,7 @@
 /*   By: mwallage <mwallage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 14:34:02 by mwallage          #+#    #+#             */
-/*   Updated: 2023/05/29 18:10:06 by mwallage         ###   ########.fr       */
+/*   Updated: 2023/05/30 18:23:22 by mwallage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 # include <stdint.h>
 # include <stdio.h>
 
-#define DEC			"0123456789"
-#define HEX_LOWER	"0123456789abcdef"
-#define HEX_UPPER	"0123456789ABCDEF"
+# define DEC		"0123456789"
+# define HEX_LOWER	"0123456789abcdef"
+# define HEX_UPPER	"0123456789ABCDEF"
 
 typedef struct s_print
 {
@@ -54,6 +54,10 @@ void			ft_print_int(t_print *tab);
 void			ft_print_uns(t_print *tab);
 void			ft_print_hex(t_print *tab, char *base, char *zerox);
 void			ft_print_perc(t_print *tab);
+/* Conversion utils*/
+unsigned int	get_unsigned_int(t_print *tab);
+int				ft_atoi_start_to_end(const char *str, int start, int end);
+unsigned int	ft_numdigits(size_t nbr, unsigned int baselen);
 /* Print conversions */
 unsigned int	ft_putstr(char *str, int strlen);
 unsigned int	ft_putnbr_base(ssize_t nbr, char *base);
@@ -63,8 +67,6 @@ int				put_sign_or_space(t_print *tab);
 unsigned int	ft_strlen(const char *str);
 size_t			ft_abs(ssize_t nbr);
 int				is_in_set(const char c, const char *set);
-int				ft_atoi_start_to_end(const char *str, int start, int end);
-unsigned int	ft_numdigits(size_t nbr, unsigned int baselen);
 int				ft_min(int a, int b);
 int				ft_max(int a, int b);
 

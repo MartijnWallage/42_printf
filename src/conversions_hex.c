@@ -6,7 +6,7 @@
 /*   By: mwallage <mwallage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 18:40:00 by mwallage          #+#    #+#             */
-/*   Updated: 2023/05/29 18:15:36 by mwallage         ###   ########.fr       */
+/*   Updated: 2023/05/30 19:05:12 by mwallage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,10 @@ void	ft_print_hex(t_print *tab, char *base, char *zerox)
 		tab->len += put_padding(tab, ' ', paddinglen);
 }
 
-void	ft_print_pnt(t_print *tab)
+static int	handle_nullptr(t_print *tab, void *ptr)
 {
-	void	*ptr;
-	size_t	nb;
-	unsigned int	numdigits;
 	unsigned int	paddinglen;
-	unsigned int	numlen;
 
-	ptr = va_arg(tab->args, void *);
 	if (ptr == NULL)
 	{
 		paddinglen = ft_max(0, tab->width - 5);
@@ -58,8 +53,22 @@ void	ft_print_pnt(t_print *tab)
 		tab->len += write(1, "(nil)", 5);
 		if (tab->dash)
 			tab->len += put_padding(tab, ' ', paddinglen);
-		return ;
+		return (1);
 	}
+	return (0);
+}
+
+void	ft_print_pnt(t_print *tab)
+{
+	void			*ptr;
+	size_t			nb;
+	unsigned int	numdigits;
+	unsigned int	paddinglen;
+	unsigned int	numlen;
+
+	ptr = va_arg(tab->args, void *);
+	if (handle_nullptr(tab, ptr))
+		return ;
 	nb = (size_t) ptr;
 	numdigits = ft_numdigits(nb, 16);
 	numlen = ft_max(tab->precision, numdigits) + 2;

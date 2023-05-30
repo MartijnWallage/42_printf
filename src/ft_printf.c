@@ -6,7 +6,7 @@
 /*   By: mwallage <mwallage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:07:39 by mwallage          #+#    #+#             */
-/*   Updated: 2023/05/29 18:10:14 by mwallage         ###   ########.fr       */
+/*   Updated: 2023/05/30 18:05:08 by mwallage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_init_tab(t_print *tab)
 	tab->neg = 0;
 }
 
-/*  %[$][flags][width][.precision][length modifier]conversion */
+/*  %[flags][width][.precision]conversion */
 int	ft_eval_format(t_print *tab, const char *format, int i)
 {
 	i = read_flags(tab, format, i);

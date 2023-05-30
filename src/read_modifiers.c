@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_modifiers.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mwallage <mwallage@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/30 18:02:31 by mwallage          #+#    #+#             */
+/*   Updated: 2023/05/30 18:20:13 by mwallage         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/ft_printf.h"
 
 int	read_flags(t_print *tab, const char *format, int i)
@@ -18,7 +30,7 @@ int	read_flags(t_print *tab, const char *format, int i)
 	}
 	if (tab->dash)
 		tab->padding = ' ';
-	tab->space = tab->space && !tab->sign;
+	tab->space = (tab->space && !tab->sign);
 	return (i);
 }
 
