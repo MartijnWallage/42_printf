@@ -6,13 +6,13 @@
 /*   By: mwallage <mwallage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:07:39 by mwallage          #+#    #+#             */
-/*   Updated: 2023/05/30 18:05:08 by mwallage         ###   ########.fr       */
+/*   Updated: 2023/05/31 19:00:06 by mwallage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/ft_printf.h"
 
-void	ft_init_tab(t_print *tab)
+static void	ft_init_tab(t_print *tab)
 {
 	tab->hash = 0;
 	tab->width = 0;
@@ -27,7 +27,7 @@ void	ft_init_tab(t_print *tab)
 }
 
 /*  %[flags][width][.precision]conversion */
-int	ft_eval_format(t_print *tab, const char *format, int i)
+static int	ft_eval_format(t_print *tab, const char *format, int i)
 {
 	i = read_flags(tab, format, i);
 	i = read_width(tab, format, i);
@@ -51,17 +51,12 @@ int	ft_eval_format(t_print *tab, const char *format, int i)
 	return (i);
 }
 
-int	ft_printf(const char *format, ...)
+static int	read_format(const char *format, t_print *tab)
 {
-	int		return_value;
-	int		i;
-	t_print	*tab;
+	int	chars_written;
+	int	i;
 
-	return_value = 0;
-	tab = malloc(sizeof(t_print));
-	if (tab == NULL)
-		return (-1);
-	va_start(tab->args, format);
+	chars_written = 0;
 	i = -1;
 	while (format[++i])
 	{
@@ -69,12 +64,28 @@ int	ft_printf(const char *format, ...)
 		if (format[i] == '%')
 		{
 			i = ft_eval_format(tab, format, i + 1);
-			return_value += tab->len;
+			chars_written += tab->len;
 		}
 		else
-			return_value += write(1, &format[i], 1);
+			chars_written += write(1, &format[i], 1);
 	}
+	return (chars_written);
+}
+
+int	ft_printf(const char *format, ...)
+{
+	int		chars_written;
+	int		i;
+	t_print	*tab;
+
+	if (format == NULL)
+		return (-1);
+	tab = malloc(sizeof(t_print));
+	if (tab == NULL)
+		return (-1);
+	va_start(tab->args, format);
+	chars_written = read_format(format, tab);
 	va_end(tab->args);
 	free(tab);
-	return (return_value);
+	return (chars_written);
 }

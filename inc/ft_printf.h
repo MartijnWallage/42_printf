@@ -6,7 +6,7 @@
 /*   By: mwallage <mwallage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 14:34:02 by mwallage          #+#    #+#             */
-/*   Updated: 2023/05/30 19:49:10 by mwallage         ###   ########.fr       */
+/*   Updated: 2023/05/31 18:59:14 by mwallage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ typedef struct s_print
 }				t_print;
 
 int				ft_printf(const char *format, ...);
-int				ft_eval_format(t_print *tab, const char *format, int i);
-void			ft_init_tab(t_print *tab);
 /* Read modifiers*/
 int				read_flags(t_print *tab, const char *format, int i);
 int				read_width(t_print *tab, const char *format, int i);
