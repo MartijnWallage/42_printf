@@ -33,21 +33,21 @@ static int	ft_eval_format(t_print *tab, const char *format, int i)
 	i = read_width(tab, format, i);
 	i = read_precision(tab, format, i);
 	if (format[i] == 'c')
-		ft_print_char(tab);
+		ft_parse_char(tab);
 	else if (format[i] == 's')
-		ft_print_str(tab);
+		ft_parse_str(tab);
 	else if (format[i] == 'p')
-		ft_print_pnt(tab);
+		ft_parse_pnt(tab);
 	else if (format[i] == 'd' || format[i] == 'i')
-		ft_print_int(tab);
+		ft_parse_int(tab);
 	else if (format[i] == 'u')
-		ft_print_uns(tab);
+		ft_parse_uns(tab);
 	else if (format[i] == 'x')
-		ft_print_hex(tab, HEX_LOWER, "0x");
+		ft_parse_hex(tab, HEX_LOWER, "0x");
 	else if (format[i] == 'X')
-		ft_print_hex(tab, HEX_UPPER, "0X");
+		ft_parse_hex(tab, HEX_UPPER, "0X");
 	else if (format[i] == '%')
-		ft_print_perc(tab);
+		ft_parse_perc(tab);
 	return (i);
 }
 

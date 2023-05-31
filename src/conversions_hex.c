@@ -12,7 +12,7 @@
 
 #include "../inc/ft_printf.h"
 
-void	ft_print_hex(t_print *tab, char *base, char *zerox)
+void	ft_parse_hex(t_print *tab, char *base, char *zerox)
 {
 	unsigned int	nb;
 	unsigned int	numdigits;
@@ -58,7 +58,7 @@ static int	handle_nullptr(t_print *tab, void *ptr)
 	return (0);
 }
 
-void	ft_print_pnt(t_print *tab)
+void	ft_parse_pnt(t_print *tab)
 {
 	void			*ptr;
 	size_t			nb;

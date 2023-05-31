@@ -36,29 +36,31 @@ typedef struct s_print
 	int		neg;
 }				t_print;
 
+/* ft_printf.c*/
 int				ft_printf(const char *format, ...);
-/* Read modifiers*/
+/* read_modifiers.c*/
 int				read_flags(t_print *tab, const char *format, int i);
 int				read_width(t_print *tab, const char *format, int i);
 int				read_precision(t_print *tab, const char *format, int i);
-/* Conversions */
-void			ft_print_char(t_print *tab);
-void			ft_print_str(t_print *tab);
-void			ft_print_pnt(t_print *tab);
-void			ft_print_int(t_print *tab);
-void			ft_print_uns(t_print *tab);
-void			ft_print_hex(t_print *tab, char *base, char *zerox);
-void			ft_print_perc(t_print *tab);
-/* Conversion utils*/
+/* conversions.c */
+void			ft_parse_char(t_print *tab);
+void			ft_parse_str(t_print *tab);
+void			ft_parse_int(t_print *tab);
+void			ft_parse_uns(t_print *tab);
+void			ft_parse_perc(t_print *tab);
+/* conversions_hex.c */
+void			ft_parse_hex(t_print *tab, char *base, char *zerox);
+void			ft_parse_pnt(t_print *tab);
+/* conversions_utils.c */
 unsigned int	get_unsigned_int(t_print *tab);
 int				ft_atoi_start_to_end(const char *str, int start, int end);
 unsigned int	ft_numdigits(size_t nbr, unsigned int baselen);
-/* Print conversions */
+/* put_conversions.c */
 unsigned int	ft_putstr(char *str, int strlen);
 unsigned int	ft_putnbr_base(ssize_t nbr, char *base);
 int				put_padding(t_print *tab, char c, int len);
 int				put_sign_or_space(t_print *tab);
-/* Utility functions */
+/* utils.c */
 unsigned int	ft_strlen(const char *str);
 int				is_in_set(const char c, const char *set);
 int				ft_min(int a, int b);

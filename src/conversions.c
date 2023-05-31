@@ -12,7 +12,7 @@
 
 #include "../inc/ft_printf.h"
 
-void	ft_print_char(t_print *tab)
+void	ft_parse_char(t_print *tab)
 {
 	char	c;
 	int		paddinglen;
@@ -26,7 +26,7 @@ void	ft_print_char(t_print *tab)
 		tab->len += put_padding(tab, ' ', paddinglen);
 }
 
-void	ft_print_str(t_print *tab)
+void	ft_parse_str(t_print *tab)
 {
 	char	*str;
 	int		paddinglen;
@@ -46,7 +46,7 @@ void	ft_print_str(t_print *tab)
 		tab->len += put_padding(tab, ' ', paddinglen);
 }
 
-void	ft_print_int(t_print *tab)
+void	ft_parse_int(t_print *tab)
 {
 	int				numlen;
 	int				numdigits;
@@ -74,7 +74,7 @@ void	ft_print_int(t_print *tab)
 		tab->len += put_padding(tab, ' ', paddinglen);
 }
 
-void	ft_print_uns(t_print *tab)
+void	ft_parse_uns(t_print *tab)
 {
 	unsigned int	nb;
 	int				numdigits;
@@ -97,7 +97,7 @@ void	ft_print_uns(t_print *tab)
 		tab->len += put_padding(tab, ' ', paddinglen);
 }
 
-void	ft_print_perc(t_print *tab)
+void	ft_parse_perc(t_print *tab)
 {
 	char	c;
 
