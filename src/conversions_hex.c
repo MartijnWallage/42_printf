@@ -6,7 +6,7 @@
 /*   By: mwallage <mwallage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 18:40:00 by mwallage          #+#    #+#             */
-/*   Updated: 2023/05/30 19:05:12 by mwallage         ###   ########.fr       */
+/*   Updated: 2023/06/01 16:28:10 by mwallage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,15 @@ void	ft_parse_hex(t_print *tab, char *base, char *zerox)
 	if (tab->hash && tab->padding == '0')
 		tab->len += write(1, zerox, 2);
 	if (!tab->dash)
-		tab->len += put_padding(tab, tab->padding, paddinglen);
+		tab->len += put_padding(tab->padding, paddinglen);
 	if (tab->hash && tab->padding == ' ')
 		tab->len += write(1, zerox, 2);
 	if (tab->point)
-		tab->len += put_padding(tab, '0', tab->precision - numdigits);
+		tab->len += put_padding('0', tab->precision - numdigits);
 	if (numlen)
 		tab->len += ft_putnbr_base(nb, base);
 	if (tab->dash)
-		tab->len += put_padding(tab, ' ', paddinglen);
+		tab->len += put_padding(' ', paddinglen);
 }
 
 static int	handle_nullptr(t_print *tab, void *ptr)
@@ -49,10 +49,10 @@ static int	handle_nullptr(t_print *tab, void *ptr)
 	{
 		paddinglen = ft_max(0, tab->width - 5);
 		if (!tab->dash)
-			tab->len += put_padding(tab, ' ', paddinglen);
+			tab->len += put_padding(' ', paddinglen);
 		tab->len += write(1, "(nil)", 5);
 		if (tab->dash)
-			tab->len += put_padding(tab, ' ', paddinglen);
+			tab->len += put_padding(' ', paddinglen);
 		return (1);
 	}
 	return (0);
@@ -76,12 +76,12 @@ void	ft_parse_pnt(t_print *tab)
 	if (tab->padding == '0')
 		tab->len += write(1, "0x", 2);
 	if (!tab->dash)
-		tab->len += put_padding(tab, tab->padding, paddinglen);
+		tab->len += put_padding(tab->padding, paddinglen);
 	if (tab->padding == ' ')
 		tab->len += write(1, "0x", 2);
 	if (tab->point)
-		tab->len += put_padding(tab, '0', tab->precision - numdigits);
+		tab->len += put_padding('0', tab->precision - numdigits);
 	tab->len += ft_putnbr_base(nb, HEX_LOWER);
 	if (tab->dash)
-		tab->len += put_padding(tab, ' ', paddinglen);
+		tab->len += put_padding(' ', paddinglen);
 }

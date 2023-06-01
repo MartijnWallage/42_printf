@@ -6,7 +6,7 @@
 /*   By: mwallage <mwallage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 18:28:34 by mwallage          #+#    #+#             */
-/*   Updated: 2023/05/30 19:53:41 by mwallage         ###   ########.fr       */
+/*   Updated: 2023/06/01 16:26:29 by mwallage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ unsigned int	ft_putnbr_base(ssize_t nbr, char *base)
 	return (chrs_written);
 }
 
-int	put_padding(t_print *tab, char c, int len)
+int	put_padding(char c, int len)
 {
 	int	chars_written;
 

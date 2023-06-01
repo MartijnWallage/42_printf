@@ -6,7 +6,7 @@
 /*   By: mwallage <mwallage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 13:07:39 by mwallage          #+#    #+#             */
-/*   Updated: 2023/05/31 19:00:06 by mwallage         ###   ########.fr       */
+/*   Updated: 2023/06/01 16:25:42 by mwallage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ static int	read_format(const char *format, t_print *tab)
 int	ft_printf(const char *format, ...)
 {
 	int		chars_written;
-	int		i;
 	t_print	*tab;
 
 	if (format == NULL)

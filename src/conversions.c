@@ -6,7 +6,7 @@
 /*   By: mwallage <mwallage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 13:33:57 by mwallage          #+#    #+#             */
-/*   Updated: 2023/05/30 19:14:42 by mwallage         ###   ########.fr       */
+/*   Updated: 2023/06/01 16:28:10 by mwallage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void	ft_parse_char(t_print *tab)
 	c = va_arg(tab->args, int);
 	paddinglen = tab->width - 1;
 	if (paddinglen > 0 && !tab->dash)
-		tab->len += put_padding(tab, ' ', paddinglen);
+		tab->len += put_padding(' ', paddinglen);
 	tab->len += write(1, &c, 1);
 	if (paddinglen > 0 && tab->dash)
-		tab->len += put_padding(tab, ' ', paddinglen);
+		tab->len += put_padding(' ', paddinglen);
 }
 
 void	ft_parse_str(t_print *tab)
@@ -40,10 +40,10 @@ void	ft_parse_str(t_print *tab)
 		strlen = ft_min(strlen, tab->precision);
 	paddinglen = ft_max(0, tab->width - strlen);
 	if (!tab->dash)
-		tab->len += put_padding(tab, ' ', paddinglen);
+		tab->len += put_padding(' ', paddinglen);
 	tab->len += ft_putstr(str, strlen);
 	if (tab->dash)
-		tab->len += put_padding(tab, ' ', paddinglen);
+		tab->len += put_padding(' ', paddinglen);
 }
 
 void	ft_parse_int(t_print *tab)
@@ -63,15 +63,15 @@ void	ft_parse_int(t_print *tab)
 	if (tab->padding == '0')
 		tab->len += put_sign_or_space(tab);
 	if (!tab->dash)
-		tab->len += put_padding(tab, tab->padding, paddinglen);
+		tab->len += put_padding(tab->padding, paddinglen);
 	if (tab->padding == ' ')
 		tab->len += put_sign_or_space(tab);
 	if (tab->point)
-		tab->len += put_padding(tab, '0', tab->precision - numdigits);
+		tab->len += put_padding('0', tab->precision - numdigits);
 	if (numlen)
 		tab->len += ft_putnbr_base(unb, DEC);
 	if (tab->dash)
-		tab->len += put_padding(tab, ' ', paddinglen);
+		tab->len += put_padding(' ', paddinglen);
 }
 
 void	ft_parse_uns(t_print *tab)
@@ -88,13 +88,13 @@ void	ft_parse_uns(t_print *tab)
 		numlen = 0;
 	paddinglen = ft_max(0, tab->width - numlen);
 	if (!tab->dash)
-		tab->len += put_padding(tab, tab->padding, paddinglen);
+		tab->len += put_padding(tab->padding, paddinglen);
 	if (tab->point)
-		tab->len += put_padding(tab, '0', tab->precision - numdigits);
+		tab->len += put_padding('0', tab->precision - numdigits);
 	if (numlen)
 		tab->len += ft_putnbr_base(nb, DEC);
 	if (tab->dash)
-		tab->len += put_padding(tab, ' ', paddinglen);
+		tab->len += put_padding(' ', paddinglen);
 }
 
 void	ft_parse_perc(t_print *tab)

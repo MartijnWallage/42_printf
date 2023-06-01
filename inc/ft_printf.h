@@ -6,7 +6,7 @@
 /*   By: mwallage <mwallage@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 14:34:02 by mwallage          #+#    #+#             */
-/*   Updated: 2023/05/31 18:59:14 by mwallage         ###   ########.fr       */
+/*   Updated: 2023/06/01 16:27:30 by mwallage         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ unsigned int	ft_numdigits(size_t nbr, unsigned int baselen);
 /* put_conversions.c */
 unsigned int	ft_putstr(char *str, int strlen);
 unsigned int	ft_putnbr_base(ssize_t nbr, char *base);
-int				put_padding(t_print *tab, char c, int len);
+int				put_padding(char c, int len);
 int				put_sign_or_space(t_print *tab);
 /* utils.c */
 unsigned int	ft_strlen(const char *str);
