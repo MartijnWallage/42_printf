@@ -4,10 +4,14 @@
 
 Author: Martijn Wallage
 
-Project of the 42 Core Curriculum.
+A project of the 42 Core Curriculum.
+
+Score: 125%
 
 ## About
 
 The aim is to recreate the printf() function of the standard C library.
 
-Bonus: with flags.
+## Bonus
+
+Handle flags. This can get pretty tedious: there are many edge cases.
